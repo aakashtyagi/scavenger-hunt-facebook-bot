@@ -33,6 +33,9 @@ app.post('/webhook', function (req, res) {
 		    }
 		} else if (event.postback) {
 		    console.log("Postback received: " + JSON.stringify(event.postback));
+		    if (postback.payload == "get started" || postback.payload == "Get Started"){
+		    	console.log("User just pressed get started. Info: New User incoming.");
+		    }
 		}
     }
     res.sendStatus(200);
