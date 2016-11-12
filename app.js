@@ -47,9 +47,10 @@ app.post('/webhook', function (req, res) {
 		    console.log("Payload value received: " + JSON.stringify(event.postback.payload));
 		    if (event.postback.payload == "get_started"){
 		    	console.log("User just pressed get started. Info: New User incoming.");
-		    	sendMessage(event.sender.id, {text: "Hi, welcome to the Scavenger Hunt! Which city are you from?"})
+		    	sendMessage(event.sender.id, {text: "Hi, welcome to the Scavenger Hunt! Which city are you from?"});
+		    	citySelect(event.sender.id);
 		    }
-		    else if (event.postback.payload == "Boston"){
+		    else if (event.postback.payload == "boston"){
 		    	// Send Boston City location of the gift && maybe double check their location?
 		    	giftLocMessage(event.sender.id, event.postback.payload);
 		    }
@@ -134,6 +135,40 @@ function sendMessage(recipientId, message) {
         }
     });
 };
+
+// send message on get started with options to choose city
+function citySelect(recipientId){
+	message = {
+		"attachment":{
+	      "type":"template",
+	      "payload":{
+	        "template_type":"generic",
+	        "elements":[
+	          {
+	            "buttons":[
+	              {
+	                "type":"postback",
+	                "title":"Boston",
+	                "payload":"boston"
+	              },
+	              {
+	                "type":"postback",
+	                "title":"San Francisco",
+	                "payload":"sanfrancisco"
+	              },
+	              {
+	                "type":"postback",
+	                "title":"San Diego",
+	                "payload":"sandiego"
+	              },
+	            ]
+	          }
+	        ]
+	      }
+		}
+	};
+	sendMessage(recipientId, message);
+}
 
 
 //send rich message when user selects "boston", "san francisco", or "san diego"
