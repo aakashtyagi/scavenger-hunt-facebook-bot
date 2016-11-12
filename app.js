@@ -38,9 +38,7 @@ app.post('/webhook', function (req, res) {
 		    }
 		    else if (event.postback.payload == "Boston"){
 		    	// Send Boston City location of the gift && maybe double check their location?
-		    	if(!giftLocMessage(event.sender.id, "Boston")){
-		    		sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
-		    	}
+		    	giftLocMessage(event.sender.id, event.postback.payload);
 		    }
 		}
     }
@@ -49,44 +47,44 @@ app.post('/webhook', function (req, res) {
 
 //Locations of scavenger hunt
 //BOSTON
-var bostonLat = 42.373017;
-var bostonLong = -71.062360;
+// var bostonLat = 42.373017;
+// var bostonLong = -71.062360;
 
-//SAN FRANCISCO
-var sanFranLat = 37.732310;
-var sanFranLong = -122.502659;
+// //SAN FRANCISCO
+// var sanFranLat = 37.732310;
+// var sanFranLong = -122.502659;
 
-//SAN DIEGO
-var sanDeigoLat = 32.801336;
-var san sanDeigoLong = -117.236578;
+// //SAN DIEGO
+// var sanDeigoLat = 32.801336;
+// var san sanDeigoLong = -117.236578;
 
 // -------------------------------- CALCULATE THE DISTANCE IN MILES BETWEEN TWO COORDINATES ----------------
-if (typeof(Number.prototype.toRadians) === "undefined") {
-  Number.prototype.toRadians = function() {
-    return this * Math.PI / 180;
-  }
-}
+// if (typeof(Number.prototype.toRadians) === "undefined") {
+//   Number.prototype.toRadians = function() {
+//     return this * Math.PI / 180;
+//   }
+// }
 
-function distance(){
-	lat1 = 37.732310;
-	lat2 = 32.801336;
-	lon1 = -122.502659;
-	lon2 = -117.236578;
-	var R = 6371e3; // metres
-	var φ1 = lat1.toRadians();
-	var φ2 = lat2.toRadians();
-	var Δφ = (lat2-lat1).toRadians();
-	var Δλ = (lon2-lon1).toRadians();
+// function distance(){
+// 	lat1 = 37.732310;
+// 	lat2 = 32.801336;
+// 	lon1 = -122.502659;
+// 	lon2 = -117.236578;
+// 	var R = 6371e3; // metres
+// 	var φ1 = lat1.toRadians();
+// 	var φ2 = lat2.toRadians();
+// 	var Δφ = (lat2-lat1).toRadians();
+// 	var Δλ = (lon2-lon1).toRadians();
 
-	var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-        	Math.cos(φ1) * Math.cos(φ2) *
-        	Math.sin(Δλ/2) * Math.sin(Δλ/2);
-	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+// 	var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+//         	Math.cos(φ1) * Math.cos(φ2) *
+//         	Math.sin(Δλ/2) * Math.sin(Δλ/2);
+// 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
-	var d = ((R * c)/1000)/1.6;
-	console.log("distance in miles:",d);
-	return d;
-}
+// 	var d = ((R * c)/1000)/1.6;
+// 	console.log("distance in miles:",d);
+// 	return d;
+// }
 // -------------------------------------------------------------------------------------------------------
 
 // GIFTS
