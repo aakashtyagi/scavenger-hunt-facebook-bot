@@ -102,7 +102,7 @@ function cityMessage(recipientId, text){
 
 	if (values.length === 1 && (values[0] === 'boston' || values[0] === 'Boston' || values[0] === 'BOSTON')){
 		
-		var bostonUrl = "https://s-media-cache-ak0.pinimg.com/236x/a7/fa/69/a7fa69dc4681bad6bd419e2bf31a95da.jpg";
+		var bostonUrl = "http://www.bostongreeterservices.com/skyline_boston.jpg";
 		message = {
 			"attachment": {
 				"type": "template",
