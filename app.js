@@ -19,6 +19,7 @@ app.get('/webhook', function (req, res) {
     } else {
         res.send('Invalid verify token');
     }
+    greetFirstTimers();
 });
 
 // handler receiving messages
@@ -36,6 +37,24 @@ app.post('/webhook', function (req, res) {
     }
     res.sendStatus(200);
 });
+
+// function to greet first-timers
+function greetFirstTimers(){
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/thread_settings',
+		qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+		method: 'POST',
+		json: {
+			setting_type: call_to_actions,
+			thread_state: new_thread,
+			call_to_actions:[
+			    {
+			      payload:USER_DEFINED_PAYLOAD
+			    }
+			]
+		}
+	})
+}
 
 // generic function sending messages
 function sendMessage(recipientId, message) {
