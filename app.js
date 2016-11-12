@@ -19,6 +19,7 @@ app.get('/webhook', function (req, res) {
     } else {
         res.send('Invalid verify token');
     }
+    console.log("about to run firsttimer function");
     greetFirstTimers();
 });
 
@@ -53,7 +54,7 @@ function greetFirstTimers(){
 			thread_state: new_thread,
 			call_to_actions:[
 			    {
-			      payload:get_started
+			      payload:"get_started",
 			    }
 			]
 		}
