@@ -11,7 +11,6 @@ app.listen((process.env.PORT || 3000));
 app.get('/', function (req, res) {
     res.send('This is TestBot Server');
 });
-
 // Facebook Webhook
 app.get('/webhook', function (req, res) {
     if (req.query['hub.verify_token'] === 'testbot_verify_token') {
@@ -37,23 +36,66 @@ app.post('/webhook', function (req, res) {
 		    	console.log("User just pressed get started. Info: New User incoming.");
 		    	sendMessage(event.sender.id, {text: "Hi, welcome to the Scavenger Hunt! Which city are you from?"})
 		    }
+		    else if (event.postback.payload == "Boston"){
+		    	// Send Boston City location of the gift && maybe double check their location?
+		    	if(!giftLocMessage(event.sender.id, "Boston")){
+		    		sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
+		    	}
+		    }
 		}
     }
     res.sendStatus(200);
 });
 
-// //Locations of scavenger hunt
-// //BOSTON
-// var bostonLat = 42.373017;
-// var bostonLong = -71.062360;
+//Locations of scavenger hunt
+//BOSTON
+var bostonLat = 42.373017;
+var bostonLong = -71.062360;
 
-// //SAN FRANCISCO
-// var sanFranLat = 37.732310;
-// var sanFranLong = -122.502659;
+//SAN FRANCISCO
+var sanFranLat = 37.732310;
+var sanFranLong = -122.502659;
 
-// //SAN DIEGO
-// var sanDeigoLat = 32.801336;
-// var san sanDeigoLong = -117.236578;
+//SAN DIEGO
+var sanDeigoLat = 32.801336;
+var san sanDeigoLong = -117.236578;
+
+// -------------------------------- CALCULATE THE DISTANCE IN MILES BETWEEN TWO COORDINATES ----------------
+if (typeof(Number.prototype.toRadians) === "undefined") {
+  Number.prototype.toRadians = function() {
+    return this * Math.PI / 180;
+  }
+}
+
+function distance(){
+	lat1 = 37.732310;
+	lat2 = 32.801336;
+	lon1 = -122.502659;
+	lon2 = -117.236578;
+	var R = 6371e3; // metres
+	var φ1 = lat1.toRadians();
+	var φ2 = lat2.toRadians();
+	var Δφ = (lat2-lat1).toRadians();
+	var Δλ = (lon2-lon1).toRadians();
+
+	var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+        	Math.cos(φ1) * Math.cos(φ2) *
+        	Math.sin(Δλ/2) * Math.sin(Δλ/2);
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+	var d = ((R * c)/1000)/1.6;
+	console.log("distance in miles:",d);
+	return d;
+}
+// -------------------------------------------------------------------------------------------------------
+
+// GIFTS
+// Each city has a gift. and that gift has a picture, description, and location to it.
+
+// CLUES
+// Clues are hints provided to the user to help them find the gift.
+// Clues are provided once the user reaches the location of the gift. This also includes sending picture of
+// the prize.
 
 
 // function to greet first-timers
@@ -113,13 +155,9 @@ function cityMessage(recipientId, text){
                             "subtitle": "Boston Scavenger Hunt",
                             "image_url": bostonUrl ,
                             "buttons": [{
-                                "type": "web_url",
-                                "url": bostonUrl,
-                                "title": "Show Boston"
-                                }, {
                                 "type": "postback",
-                                "title": "Confirm",
-                                "payload": "User " + recipientId + " is from Boston ",
+                                "title": "Confirm location",
+                                "payload": "Boston",
 						}]
 					}]
 				}
@@ -129,6 +167,34 @@ function cityMessage(recipientId, text){
 		sendMessage(recipientId, message);
 
 		return true;
+	}
+
+	return false;
+}
+
+// Location of the gift message
+function giftLocMessage(recipientId, text){
+
+	text = text || "";
+	if (text === 'Boston'){
+		message = {
+			"attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": {
+                    "element": {
+                        "title": "Gift location in Boston",
+                        "image_url": "https:\/\/maps.googleapis.com\/maps\/api\/staticmap?size=764x400&center="+bostonLat+","+bostonLong+"&zoom=25&markers="+bostonLat+","+bostonLong,
+                        "item_url": "http:\/\/maps.apple.com\/maps?q="+bostonLat+","+bostonLong+"&z=16"
+                    	}
+                	}
+            	}
+        	}
+		};
+		sendMessage(recipientId, message);
+            
+        return true;
 	}
 
 	return false;
