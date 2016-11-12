@@ -228,6 +228,9 @@ function giftLocMessage(recipientId, text){
                         "title": "Gift location in Boston",
                         "image_url": "https:\/\/maps.googleapis.com\/maps\/api\/staticmap?size=764x400&center="+bostonLat+","+bostonLong+"&zoom=25&markers="+bostonLat+","+bostonLong,
                         "item_url": "http:\/\/maps.apple.com\/maps?q="+bostonLat+","+bostonLong+"&z=16"
+                    	},
+                    	"element": {
+                        "title": "Let us know when you arrive at the location",
                     	}
                 	}
             	}
