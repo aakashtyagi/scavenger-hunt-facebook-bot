@@ -152,16 +152,16 @@ function citySelect(recipientId){
 	                "title":"Boston",
 	                "payload":"boston"
 	              },
-	              // {
-	              //   "type":"postback",
-	              //   "title":"San Francisco",
-	              //   "payload":"sanfrancisco"
-	              // },
-	              // {
-	              //   "type":"postback",
-	              //   "title":"San Diego",
-	              //   "payload":"sandiego"
-	              // },
+	              {
+	                "type":"postback",
+	                "title":"San Francisco",
+	                "payload":"sanfrancisco"
+	              },
+	              {
+	                "type":"postback",
+	                "title":"San Diego",
+	                "payload":"sandiego"
+	              },
 	            ]
 	          }
 	        ]
