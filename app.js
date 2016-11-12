@@ -47,7 +47,7 @@ app.post('/webhook', function (req, res) {
 		    console.log("Payload value received: " + JSON.stringify(event.postback.payload));
 		    if (event.postback.payload == "get_started"){
 		    	console.log("User just pressed get started. Info: New User incoming.");
-		    	sendMessage(event.sender.id, {text: "Hi, welcome to the Scavenger Hunt! Which city are you from?"});
+		    	// sendMessage(event.sender.id, {text: "Hi, welcome to the Scavenger Hunt! Which city are you from?"});
 		    	citySelect(event.sender.id);
 		    }
 		    else if (event.postback.payload == "boston"){
@@ -145,6 +145,7 @@ function citySelect(recipientId){
 	        "template_type":"generic",
 	        "elements":[
 	          {
+	          	"title": "Which city do you live in?",
 	            "buttons":[
 	              {
 	                "type":"postback",
@@ -167,6 +168,7 @@ function citySelect(recipientId){
 	      }
 		}
 	};
+	console.log(message);
 	sendMessage(recipientId, message);
 	return true;
 }
