@@ -50,13 +50,13 @@ app.post('/webhook', function (req, res) {
 var bostonLat = 42.373017;
 var bostonLong = -71.062360;
 
-// //SAN FRANCISCO
-// var sanFranLat = 37.732310;
-// var sanFranLong = -122.502659;
+//SAN FRANCISCO
+var sanFranLat = 37.732310;
+var sanFranLong = -122.502659;
 
-// //SAN DIEGO
-// var sanDeigoLat = 32.801336;
-// var san sanDeigoLong = -117.236578;
+//SAN DIEGO
+var sanDeigoLat = 32.801336;
+var san sanDeigoLong = -117.236578;
 
 // -------------------------------- CALCULATE THE DISTANCE IN MILES BETWEEN TWO COORDINATES ----------------
 // if (typeof(Number.prototype.toRadians) === "undefined") {
