@@ -27,7 +27,7 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
-		    if (!kittenMessage(event.sender.id, event.message.text)) {
+		    if (!kittenMessage(event.sender.id, event.message.text)) || (!cityMessage(event.sender.id, event.message.text)) {
 		        sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
 		    }
 		} else if (event.postback) {
@@ -35,12 +35,26 @@ app.post('/webhook', function (req, res) {
 		    console.log("Payload value received: " + JSON.stringify(event.postback.payload));
 		    if (event.postback.payload == "get_started"){
 		    	console.log("User just pressed get started. Info: New User incoming.");
-		    	sendMessage(event.sender.id, {text: "Hi, " + event.sender.id.first_name + "welcome to the Scavenger Hunt! Which city are you from?"})
+		    	sendMessage(event.sender.id, {text: "Hi, welcome to the Scavenger Hunt! Which city are you from?"})
 		    }
 		}
     }
     res.sendStatus(200);
 });
+
+//Locations of scavenger hunt
+//BOSTON
+var bostonLat = 42.373017;
+var bostonLong = -71.062360;
+
+//SAN FRANCISCO
+var sanFranLat = 37.732310;
+var sanFranLong = -122.502659;
+
+//SAN DIEGO
+var sanDeigoLat = 32.801336;
+var san sanDeigoLong = -117.236578;
+
 
 // function to greet first-timers
 function greetFirstTimers(){
@@ -79,6 +93,46 @@ function sendMessage(recipientId, message) {
     });
 };
 
+
+//send rich message when user selects "boston", "san francisco", or "san diego"
+function cityMessage(recipientId, text){
+
+	text = text || "";
+	var values = text.split(' ');
+
+	if (values.length === 1 && (values[0] === 'boston' || values[0] === 'Boston' || values[0] === 'BOSTON')){
+		
+		var bostonUrl = "https://s-media-cache-ak0.pinimg.com/236x/a7/fa/69/a7fa69dc4681bad6bd419e2bf31a95da.jpg";
+		message = {
+			"attachment": {
+				"type": "template",
+				"payload": {
+					"template_type": "generic",
+					"elements": [{
+						"title": "City | Boston",
+                            "subtitle": "Boston Scavenger Hunt",
+                            "image_url": bostonUrl ,
+                            "buttons": [{
+                                "type": "web_url",
+                                "url": bostonUrl,
+                                "title": "Show Boston"
+                                }, {
+                                "type": "postback",
+                                "title": "Confirm",
+                                "payload": "User " + recipientId + " is from Boston ",
+						}]
+					}
+				}
+			}
+		}
+
+		sendMessage(recipientId, message);
+
+		return true;
+	}
+
+	return false;
+}
 
 // send rich message with kitten
 function kittenMessage(recipientId, text) {
