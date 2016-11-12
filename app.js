@@ -35,6 +35,7 @@ app.post('/webhook', function (req, res) {
 		    console.log("Payload value received: " + JSON.stringify(event.postback.payload));
 		    if (event.postback.payload == "get_started"){
 		    	console.log("User just pressed get started. Info: New User incoming.");
+		    	sendMessage(event.sender.id, {text: "Hi {{user_first_name}}, welcome to the Scavenger Hunt! Which city are you from?"})
 		    }
 		}
     }
