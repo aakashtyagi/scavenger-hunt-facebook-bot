@@ -3,6 +3,19 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
 
+//Locations of scavenger hunt
+//BOSTON
+var bostonLat = 42.373017;
+var bostonLong = -71.062360;
+
+// //SAN FRANCISCO
+// var sanFranLat = 37.732310;
+// var sanFranLong = -122.502659;
+
+// //SAN DIEGO
+// var sanDeigoLat = 32.801336;
+// var san sanDeigoLong = -117.236578;
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 3000));
@@ -45,18 +58,7 @@ app.post('/webhook', function (req, res) {
     res.sendStatus(200);
 });
 
-//Locations of scavenger hunt
-//BOSTON
-var bostonLat = 42.373017;
-var bostonLong = -71.062360;
 
-//SAN FRANCISCO
-var sanFranLat = 37.732310;
-var sanFranLong = -122.502659;
-
-//SAN DIEGO
-var sanDeigoLat = 32.801336;
-var san sanDeigoLong = -117.236578;
 
 // -------------------------------- CALCULATE THE DISTANCE IN MILES BETWEEN TWO COORDINATES ----------------
 // if (typeof(Number.prototype.toRadians) === "undefined") {
