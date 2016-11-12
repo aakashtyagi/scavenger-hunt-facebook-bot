@@ -34,7 +34,7 @@ app.post('/webhook', function (req, res) {
 		} else if (event.postback) {
 		    console.log("Postback received: " + JSON.stringify(event.postback));
 		    console.log("Payload value received: " + JSON.stringify(event.postback.payload));
-		    if (event.postback.payload == "get started" || event.postback.payload == "Get Started"){
+		    if (event.postback.payload == "get_started"){
 		    	console.log("User just pressed get started. Info: New User incoming.");
 		    }
 		}
@@ -53,7 +53,7 @@ function greetFirstTimers(){
 			thread_state: new_thread,
 			call_to_actions:[
 			    {
-			      payload:USER_DEFINED_PAYLOAD
+			      payload:get_started
 			    }
 			]
 		}
