@@ -165,11 +165,6 @@ function citySelect(recipientId){
 	                "title":"San Diego",
 	                "payload":"sandiegocity"
 	              },
-	              {
-	                "type":"postback",
-	                "title":"Other",
-	                "payload":"othercity"
-	              },
 	            ]
 	          }
 	        ]
