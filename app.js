@@ -217,7 +217,7 @@ function cityMessage(recipientId, text){
 function giftLocMessage(recipientId, text){
 
 	text = text || "";
-	if (text === 'boston'){
+	if (text === 'bostongift'){
 		message = {
 			"attachment": {
             "type": "template",
