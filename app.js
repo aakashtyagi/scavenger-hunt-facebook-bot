@@ -121,7 +121,7 @@ function cityMessage(recipientId, text){
                                 "title": "Confirm",
                                 "payload": "User " + recipientId + " is from Boston ",
 						}]
-					}
+					}]
 				}
 			}
 		}
