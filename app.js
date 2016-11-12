@@ -19,8 +19,6 @@ app.get('/webhook', function (req, res) {
     } else {
         res.send('Invalid verify token');
     }
-    console.log("about to run firsttimer function");
-    greetFirstTimers();
 });
 
 // handler receiving messages
