@@ -27,7 +27,7 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
-		    if (!kittenMessage(event.sender.id, event.message.text)) || (!cityMessage(event.sender.id, event.message.text)) {
+		    if (!cityMessage(event.sender.id, event.message.text)){
 		        sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
 		    }
 		} else if (event.postback) {
@@ -42,18 +42,18 @@ app.post('/webhook', function (req, res) {
     res.sendStatus(200);
 });
 
-//Locations of scavenger hunt
-//BOSTON
-var bostonLat = 42.373017;
-var bostonLong = -71.062360;
+// //Locations of scavenger hunt
+// //BOSTON
+// var bostonLat = 42.373017;
+// var bostonLong = -71.062360;
 
-//SAN FRANCISCO
-var sanFranLat = 37.732310;
-var sanFranLong = -122.502659;
+// //SAN FRANCISCO
+// var sanFranLat = 37.732310;
+// var sanFranLong = -122.502659;
 
-//SAN DIEGO
-var sanDeigoLat = 32.801336;
-var san sanDeigoLong = -117.236578;
+// //SAN DIEGO
+// var sanDeigoLat = 32.801336;
+// var san sanDeigoLong = -117.236578;
 
 
 // function to greet first-timers
