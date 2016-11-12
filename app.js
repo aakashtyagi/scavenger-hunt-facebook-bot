@@ -50,7 +50,10 @@ app.post('/webhook', function (req, res) {
 		    	// sendMessage(event.sender.id, {text: "Hi, welcome to the Scavenger Hunt! Which city are you from?"});
 		    	citySelect(event.sender.id);
 		    }
-		    else if (event.postback.payload == "boston"){
+		    else if (event.postback.payload == "bostoncity"){
+		    	cityMessage(event.sender.id, event.postback.payload);
+		    }
+		    else if (event.postback.payload == "bostongift"){
 		    	// Send Boston City location of the gift && maybe double check their location?
 		    	giftLocMessage(event.sender.id, event.postback.payload);
 		    }
@@ -145,22 +148,27 @@ function citySelect(recipientId){
 	        "template_type":"generic",
 	        "elements":[
 	          {
-	          	"title": "Which city do you live in?",
+	          	"title": "Hi, Welcome to the Scavenger Hunt! Which city do you live in?",
 	            "buttons":[
 	              {
 	                "type":"postback",
 	                "title":"Boston",
-	                "payload":"boston"
+	                "payload":"bostoncity"
 	              },
 	              {
 	                "type":"postback",
 	                "title":"San Francisco",
-	                "payload":"sanfrancisco"
+	                "payload":"sanfranciscocity"
 	              },
 	              {
 	                "type":"postback",
 	                "title":"San Diego",
-	                "payload":"sandiego"
+	                "payload":"sandiegocity"
+	              },
+	              {
+	                "type":"postback",
+	                "title":"Other",
+	                "payload":"othercity"
 	              },
 	            ]
 	          }
@@ -168,7 +176,7 @@ function citySelect(recipientId){
 	      }
 		}
 	};
-	console.log(message);
+	// console.log(message);
 	sendMessage(recipientId, message);
 	return true;
 }
@@ -180,7 +188,7 @@ function cityMessage(recipientId, text){
 	text = text || "";
 	var values = text.split(' ');
 
-	if (values.length === 1 && (values[0] === 'boston' || values[0] === 'Boston' || values[0] === 'BOSTON')){
+	if (values.length === 1 && values[0] === 'bostoncity'){
 		
 		var bostonUrl = "http://www.bostongreeterservices.com/skyline_boston.jpg";
 		message = {
@@ -195,7 +203,7 @@ function cityMessage(recipientId, text){
                             "buttons": [{
                                 "type": "postback",
                                 "title": "Confirm location",
-                                "payload": "Boston",
+                                "payload": "bostongift",
 						}]
 					}]
 				}
