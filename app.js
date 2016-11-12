@@ -47,8 +47,8 @@ app.post('/webhook', function (req, res) {
 
 //Locations of scavenger hunt
 //BOSTON
-// var bostonLat = 42.373017;
-// var bostonLong = -71.062360;
+var bostonLat = 42.373017;
+var bostonLong = -71.062360;
 
 // //SAN FRANCISCO
 // var sanFranLat = 37.732310;
