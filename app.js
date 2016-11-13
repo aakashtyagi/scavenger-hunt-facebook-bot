@@ -39,10 +39,11 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
+
+        	if(event.message.attachment.payload == "bostoncity"){
+        		cityMessage(event.sender.id, event.message.attachment.payload);
+        	}
 		    if (!cityMessage(event.sender.id, event.message.text)){
-		    	console.log(event.message.attachments);
-		    	console.log(event.message.attachments[0]);
-		    	console.log(event.message.attachments[0].payload);
 		    	if(event.message.attachments[0].payload.coordinates.lat){
 		    		lat1 = event.message.attachments[0].payload.coordinates.lat;
 					lon1 = event.message.attachments[0].payload.coordinates.long;
@@ -159,7 +160,7 @@ function citySelect(recipientId){
 		"text":"Pick a city:",
 		    "quick_replies":[
 		      {
-		      	"type":"postback",
+		      	// "type":"postback",
 		        "content_type":"text",
 		        "title":"Boston",
 		        "payload":"bostoncity"
