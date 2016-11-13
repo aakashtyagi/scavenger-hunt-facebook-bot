@@ -53,7 +53,10 @@ app.post('/webhook', function (req, res) {
 					if(event.message.quick_reply.payload == 'bostoncity'){
 						cityMessage(event.sender.id, event.message.quick_reply.payload);
 					}
-				}
+			}
+			if(event.message.attachments[0].payload.coordinates){
+				console.log("ITS WORKING BITCHES!!!");
+			}
 		} else if (event.postback) {
 		    console.log("Postback received: " + JSON.stringify(event.postback));
 		    console.log("Payload value received: " + JSON.stringify(event.postback.payload));
