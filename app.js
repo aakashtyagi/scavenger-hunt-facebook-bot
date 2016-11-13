@@ -47,12 +47,13 @@ app.post('/webhook', function (req, res) {
 				    console.log(propName,propValue);
 				}
 		        sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
-		    }
-		    if(! typeof event.message.quick_reply.payload === undefined){
+		        if(! typeof event.message.quick_reply.payload === undefined){
 					if(event.message.quick_reply.payload == 'bostoncity'){
 						cityMessage(event.sender.id, event.message.quick_reply.payload);
 					}
-			}
+				}
+		    }
+		    
 			// if(event.message.attachments.payload.coordinates){
 			// 	console.log(vent.message.attachments.payload.coordinates.lat);
 			// 	console.log(vent.message.attachments.payload.coordinates.long);
