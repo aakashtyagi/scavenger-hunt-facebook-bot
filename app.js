@@ -67,8 +67,8 @@ app.post('/webhook', function (req, res) {
 		    }
 		    else if (event.postback.payload == "bostongift"){
 		    	// Send Boston City location of the gift && maybe double check their location?
-		    	giftLocMessage(event.sender.id, event.postback.payload);
-		    	arrivalInquiry(event.sender.id);
+		    	giftLocMessage(event.sender.id, event.postback.payload,arrivalInquiry(event.sender.id));
+		    	
 		    }
 		}
     }
