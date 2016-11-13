@@ -43,10 +43,12 @@ app.post('/webhook', function (req, res) {
 		    	if(event.message.hasOwnProperty("attachments")){
 		    		console.log("it has an attachement");
 		    		if(event.message.attachments[0].hasOwnProperty("payload")){
-		    			console.log("fuck off");
-		    		}
-		    		else if(event.message.attachments.hasOwnProperty("payload")){
-		    			console.log("it has a payload");
+		    			console.log("it's got a payload");
+		    			if(event.message.attachments[0].payload.hasOwnProperty("coordinates")){
+		    				console.log("------------Location:-----------");
+		    				console.log(event.message.attachments[0].payload.lat);
+		    				console.log(event.message.attachments[0].payload.long);
+		    			}
 		    		}
 		    	}
 		    }
