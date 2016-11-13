@@ -36,36 +36,21 @@ app.get('/webhook', function (req, res) {
 // handler receiving messages
 app.post('/webhook', function (req, res) {
     var events = req.body.entry[0].messaging;
-
-    if(events.hasOwnProperty("message")){
-    	console.log("it has a message");
-    	if(events.message.hasOwnProperty("attachments")){
-    		console.log("it has an attachement");
-    		if(events.message.attachments[0].hasOwnProperty("payload")){
-    			console.log("fuck off");
-    		}
-    		else if(events.message.attachments.hasOwnProperty("payload")){
-    			console.log("it has a payload");
-    		}
-    	}
-    }
-
-  //   if(events.message.hasOwnProperty("attachments")){
-	 //    if(typeof events.message.attachments[0] !== undefined){
-	 //    	if(events.message.attachments[0].hasOwnProperty("payload")){
-		// 			if(typeof events.message.attachments[0].payload.coordinates !== undefined){
-		// 				console.log("ITS WORKING BITCHES!!!");
-		// 				console.log(events.message.attachments[0].payload.coordinates.lat);
-		// 				console.log(events.message.attachments[0].payload.coordinates.long);
-		// 			}
-					
-		// 		}
-		// 	}
-		// }
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
-        	// console.log(event.message);
+        	if(event.hasOwnProperty("message")){
+		    	console.log("it has a message");
+		    	if(event.message.hasOwnProperty("attachments")){
+		    		console.log("it has an attachement");
+		    		if(event.message.attachments[0].hasOwnProperty("payload")){
+		    			console.log("fuck off");
+		    		}
+		    		else if(event.message.attachments.hasOwnProperty("payload")){
+		    			console.log("it has a payload");
+		    		}
+		    	}
+		    }
 
 		    if (!cityMessage(event.sender.id, event.message.text)){
 		    	
