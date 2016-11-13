@@ -228,7 +228,26 @@ function giftLocMessage(recipientId, text){
                         "title": "Gift location in Boston",
                         "image_url": "https:\/\/maps.googleapis.com\/maps\/api\/staticmap?size=764x400&center="+bostonLat+","+bostonLong+"&zoom=25&markers="+bostonLat+","+bostonLong,
                         "item_url": "http:\/\/maps.apple.com\/maps?q="+bostonLat+","+bostonLong+"&z=16"
-                    	},
+                    	}
+                	}
+            	}
+        	}
+		};
+		sendMessage(recipientId, message);
+        arrivalInquiry(recipientId);
+        return true;
+	}
+
+	return false;
+}
+
+function arrivalInquiry(recipientId){
+	message = {
+			"attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": {
                     	"element": {
                         "title": "Let us know when you arrive at the location",
 			            "buttons":[
@@ -243,11 +262,6 @@ function giftLocMessage(recipientId, text){
         	}
 		};
 		sendMessage(recipientId, message);
-            
-        return true;
-	}
-
-	return false;
 }
 
 // send rich message with kitten
