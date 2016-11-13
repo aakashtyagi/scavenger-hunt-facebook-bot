@@ -46,10 +46,9 @@ app.post('/webhook', function (req, res) {
 
 				    console.log(propName,propValue);
 				}
-				// console.log(event.message.quick_reply.payload);
 		        sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
 		    }
-		    if(event.message.quick_reply.payload){
+		    if(! typeof event.message.quick_reply.payload === undefined){
 					if(event.message.quick_reply.payload == 'bostoncity'){
 						cityMessage(event.sender.id, event.message.quick_reply.payload);
 					}
