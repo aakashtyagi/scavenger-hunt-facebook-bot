@@ -67,8 +67,8 @@ app.post('/webhook', function (req, res) {
 		    }
 		    else if (event.postback.payload == "bostongift"){
 		    	// Send Boston City location of the gift && maybe double check their location?
-		    	giftLocMessage(event.sender.id, event.postback.payload,arrivalInquiry(event.sender.id));
-		    	
+		    	giftLocMessage(event.sender.id, event.postback.payload);
+		    	arrivalInquiry(event.sender.id);
 		    }
 		}
     }
@@ -233,7 +233,8 @@ function giftLocMessage(recipientId, text){
                 "elements": {
                     "element": {
                         "title": "Gift location in Boston",
-                        "image_url": "https:\/\/maps.googleapis.com\/maps\/api\/staticmap?size=764x400&center="+bostonLat+","+bostonLong+"&zoom=50&markers="+bostonLat+","+bostonLong,
+                        "image_url": "https:\/\/maps.googleapis.com\/maps\/api\/staticmap?center="+bostonLat+","+bostonLong+"&zoom=16&size=764x400&key=AIzaSyB-gIN9zEFn-JiVlkYJ7XKBxiH2RtohjY0",
+                        // "image_url": "https:\/\/maps.googleapis.com\/maps\/api\/staticmap?size=764x400&center="+bostonLat+","+bostonLong+"&zoom=50&markers="+bostonLat+","+bostonLong,
                         "item_url": "http:\/\/maps.apple.com\/maps?q="+bostonLat+","+bostonLong+"&z=16"
                     	}
                 	}
