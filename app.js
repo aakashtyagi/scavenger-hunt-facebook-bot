@@ -174,7 +174,7 @@ function citySelect(recipientId){
 		        "payload":"sandiegocity"
 		      }
 		    ]
-		}
+		};
 
 
 		// "attachment":{
@@ -205,7 +205,6 @@ function citySelect(recipientId){
 	 //        ]
 	 //      }
 		// }
-	};
 	// console.log(message);
 	sendMessage(recipientId, message);
 	return true;
