@@ -286,12 +286,12 @@ function arrivalInquiry(recipientId){
 		sendMessage(recipientId, message);
 }
 
-function distanceMessage(recipientId, distance){
-	message = {
-	  	"text":"You are " + distance + " miles away from the gift location.";
-	  };
-	  sendMessage(recipientId, message);
-}
+// function distanceMessage(recipientId, distance){
+// 	message = {
+// 	  	"text":"You are " + distance + " miles away from the gift location.";
+// 	  };
+// 	  sendMessage(recipientId, message);
+// }
 
 // send rich message with kitten
 function kittenMessage(recipientId, text) {
