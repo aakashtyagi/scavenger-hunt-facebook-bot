@@ -231,19 +231,19 @@ function giftLocMessage(recipientId, text){
             "type": "template",
             "payload": {
                 "template_type": "generic",
-                "elements": {
+                "elements": [{
                     "element": {
                         "title": "Gift location in Boston",
                         "image_url": "https:\/\/maps.googleapis.com\/maps\/api\/staticmap?center="+bostonLat+","+bostonLong+"&zoom=16&size=764x400&key=AIzaSyB-gIN9zEFn-JiVlkYJ7XKBxiH2RtohjY0",
                         "item_url": "http:\/\/maps.apple.com\/maps?q="+bostonLat+","+bostonLong+"&z=16"
-                    	}
+                    	},
                     "buttons":[
 		              {
 		                "type":"postback",
 		                "payload":"calculateDistance",
 		                "title":"How far am I from this location?"
 		              }]
-                	}
+                	}]
             	}
         	}
 		};
