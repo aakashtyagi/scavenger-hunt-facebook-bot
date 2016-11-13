@@ -231,6 +231,12 @@ function giftLocMessage(recipientId, text){
                     	},
                     	"element": {
                         "title": "Let us know when you arrive at the location",
+			            "buttons":[
+			              {
+			                "type":"postback",
+			                "title":"Arrived",
+			                "payload":"arrivedboston"
+			              }]
                     	}
                 	}
             	}
