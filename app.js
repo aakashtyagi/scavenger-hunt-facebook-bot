@@ -36,11 +36,11 @@ app.get('/webhook', function (req, res) {
 // handler receiving messages
 app.post('/webhook', function (req, res) {
     var events = req.body.entry[0].messaging;
-    if(typeof event.message.attachments[0] !== undefined){
-				if(typeof event.message.attachments[0].payload.coordinates !== undefined){
+    if(typeof events.message.attachments[0] !== undefined){
+				if(typeof events.message.attachments[0].payload.coordinates !== undefined){
 					console.log("ITS WORKING BITCHES!!!");
-					console.log(event.message.attachments[0].payload.coordinates.lat);
-					console.log(event.message.attachments[0].payload.coordinates.long);
+					console.log(events.message.attachments[0].payload.coordinates.lat);
+					console.log(events.message.attachments[0].payload.coordinates.long);
 				}
 				
 			}
