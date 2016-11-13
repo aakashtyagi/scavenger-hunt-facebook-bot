@@ -91,6 +91,9 @@ app.post('/webhook', function (req, res) {
 		    else if (event.postback.payload == "calculateDistance"){
 		    	arrivalInquiry(event.sender.id);
 		    }
+		    else if (event.postback.payload == "arrived"){
+		    	cluesMessage(event.sender.id);
+		    }
 		}
     }
     res.sendStatus(200);
@@ -289,9 +292,25 @@ function arrivalInquiry(recipientId){
 
 function distanceMessage(recipientId, distance){
 	message = {
-	  	"text":"You are "+distance+ " miles away from the gift location. Once you reach the location, type \"I am here\"."
+	  	"text":"You are "+distance+ " miles away from the gift location. Once you reach the location, select \"I am here\" by tapping the menu on the left."
 	  };
 	  sendMessage(recipientId, message);
+}
+
+function cluesMessage(recipientId){
+	if(bostonSelected){
+		var bostonClues = "Step 1 -> Look for a place called \'Circle Donuts\'','Step 2 -> Go inside the shop and ask for Scavenger Hunt menu', 'Step 3 -> Receive the gift, smile at the lady and say \'Thank you\'";
+		message = {
+		  	"text": bostonClues,
+		  };
+		sendMessage(recipientId, message);
+	}
+	else if(sanFranSelected){
+
+	}
+	else if(sanDiegoSelected){
+
+	}
 }
 
 // send rich message with kitten
