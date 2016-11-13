@@ -289,7 +289,7 @@ function arrivalInquiry(recipientId){
 function distanceMessage(recipientId, distance){
 	message = {
 	  	"text":"You are " + distance + " miles away from the gift location.";
-	  }
+	  };
 	  sendMessage(recipientId, message);
 }
 
