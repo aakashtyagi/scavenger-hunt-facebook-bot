@@ -49,7 +49,7 @@ app.post('/webhook', function (req, res) {
 				// console.log(event.message.quick_reply.payload);
 		        sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
 		    }
-		    if(event.message.quick_reply){
+		    if(event.message.quick_reply.payload){
 					if(event.message.quick_reply.payload == 'bostoncity'){
 						cityMessage(event.sender.id, event.message.quick_reply.payload);
 					}
