@@ -69,7 +69,9 @@ app.post('/webhook', function (req, res) {
 		    	// Send Boston City location of the gift && maybe double check their location?
 		    	giftLocMessage(event.sender.id, event.postback.payload);
 		    	// arrivalInquiry(event.sender.id);
-
+		    }
+		    else if (event.postback.payload == "calculateDistance"){
+		    	arrivalInquiry(event.sender.id);
 		    }
 		}
     }
@@ -241,7 +243,7 @@ function giftLocMessage(recipientId, text){
 		              {
 		                "type":"postback",
 		                "payload":"calculateDistance",
-		                "title":"How far am I from this location?"
+		                "title":"How far am I?"
 		              }]
                 	}]
             	}
