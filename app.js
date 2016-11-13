@@ -4,7 +4,6 @@ var request = require('request');
 var app = express();
 
 //Locations of scavenger hunt
-var loc = false;
 //BOSTON
 var bostonLat = 42.373017;
 var bostonLong = -71.062360;
@@ -55,9 +54,11 @@ app.post('/webhook', function (req, res) {
 						cityMessage(event.sender.id, event.message.quick_reply.payload);
 					}
 			}
-			if(loc == true && event.message.attachments[0].payload.coordinates){
-				console.log("ITS WORKING BITCHES!!!");
-				loc = false;
+			if(typeof event.message.attachments[0] !== undefined){
+				if(typeof event.message.attachments[0].payload.coordinates !== undefined){
+					console.log("ITS WORKING BITCHES!!!");
+				}
+				
 			}
 		} else if (event.postback) {
 		    console.log("Postback received: " + JSON.stringify(event.postback));
@@ -77,7 +78,6 @@ app.post('/webhook', function (req, res) {
 		    }
 		    else if (event.postback.payload == "calculateDistance"){
 		    	arrivalInquiry(event.sender.id);
-		    	loc = true;
 		    }
 		}
     }
