@@ -80,7 +80,7 @@ app.post('/webhook', function (req, res) {
 		    	citySelect(event.sender.id);
 		    }
 		    else if (event.postback.payload == "bostoncity"){
-		    	// bostonSelected = true;
+		    	bostonSelected = true;
 		    	cityMessage(event.sender.id, event.postback.payload);
 		    }
 		    else if (event.postback.payload == "bostongift"){
