@@ -40,8 +40,8 @@ app.post('/webhook', function (req, res) {
         var event = events[i];
         if (event.message && event.message.text) {
 
-        	if(event.message.attachment.payload == "bostoncity"){
-        		cityMessage(event.sender.id, event.message.attachment.payload);
+        	if(event.message.quick_replies[0].payload == "bostoncity"){
+        		cityMessage(event.sender.id, event.message.quick_replies[0].payload);
         	}
 		    if (!cityMessage(event.sender.id, event.message.text)){
 		    	if(event.message.attachments[0].payload.coordinates.lat){
