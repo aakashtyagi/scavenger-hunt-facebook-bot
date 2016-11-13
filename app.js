@@ -40,6 +40,12 @@ app.post('/webhook', function (req, res) {
         var event = events[i];
         if (event.message && event.message.text) {
 		    if (!cityMessage(event.sender.id, event.message.text)){
+		    	if(event.message.attachments[0].payload.coordinates.lat){
+		    		lat1 = event.message.attachments[0].payload.coordinates.lat;
+					lon1 = event.message.attachments[0].payload.coordinates.long;
+					dist = distance(lat1, lon1, bostonLat, bostonLong);
+					sendMessage(event.sender.id, {text: "You are " + dist + " miles away from gift"});
+		    	}
 		        sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
 		    }
 		} else if (event.postback) {
@@ -71,11 +77,11 @@ if (typeof(Number.prototype.toRadians) === "undefined") {
   }
 }
 
-function distance(){
-	lat1 = 37.732310;
-	lat2 = 32.801336;
-	lon1 = -122.502659;
-	lon2 = -117.236578;
+function distance(lat1, lon1, lat2, lon2){
+	// lat1 = 37.732310;
+	// lat2 = 32.801336;
+	// lon1 = -122.502659;
+	// lon2 = -117.236578;
 	var R = 6371e3; // metres
 	var φ1 = lat1.toRadians();
 	var φ2 = lat2.toRadians();
@@ -100,6 +106,11 @@ function distance(){
 // Clues are hints provided to the user to help them find the gift.
 // Clues are provided once the user reaches the location of the gift. This also includes sending picture of
 // the prize.
+
+// calculate how far user is from gift location
+// function howFarFromGift(recipientId, text){
+
+// }
 
 
 // function to greet first-timers
