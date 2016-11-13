@@ -48,7 +48,7 @@ app.post('/webhook', function (req, res) {
 		    				console.log("------------Location:-----------");
 		    				console.log(event.message.attachments[0].payload.coordinates.lat);
 		    				console.log(event.message.attachments[0].payload.coordinates.long);
-
+		    				console.log(bostonSelected);
 		    				lat = event.message.attachments[0].payload.coordinates.lat;
 		    				long = event.message.attachments[0].payload.coordinates.long;
 		    				if(bostonSelected){
@@ -234,7 +234,7 @@ function cityMessage(recipientId, text){
 		}
 
 		sendMessage(recipientId, message);
-
+		bostonSelected = true;
 		return true;
 	}
 
