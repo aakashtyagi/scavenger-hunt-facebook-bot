@@ -263,7 +263,7 @@ function arrivalInquiry(recipientId){
         "content_type":"location",
       }
     ]
-  }
+  };
 		sendMessage(recipientId, message);
 }
 
