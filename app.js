@@ -40,6 +40,9 @@ app.post('/webhook', function (req, res) {
         var event = events[i];
         if (event.message && event.message.text) {
 		    if (!cityMessage(event.sender.id, event.message.text)){
+		    	console.log(event.message.attachments);
+		    	console.log(event.message.attachments[0]);
+		    	console.log(event.message.attachments[0].payload);
 		    	if(event.message.attachments[0].payload.coordinates.lat){
 		    		lat1 = event.message.attachments[0].payload.coordinates.lat;
 					lon1 = event.message.attachments[0].payload.coordinates.long;
