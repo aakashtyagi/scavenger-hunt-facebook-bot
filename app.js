@@ -38,8 +38,7 @@ app.post('/webhook', function (req, res) {
     var events = req.body.entry[0].messaging;
     for (i = 0; i < events.length; i++) {
         var event = events[i];
-        if (event.message && event.message.text) {
-        	if(event.hasOwnProperty("message")){
+        if(event.hasOwnProperty("message")){
 		    	console.log("it has a message");
 		    	if(event.message.hasOwnProperty("attachments")){
 		    		console.log("it has an attachement");
@@ -51,7 +50,7 @@ app.post('/webhook', function (req, res) {
 		    		}
 		    	}
 		    }
-
+        if (event.message && event.message.text) {
 		    if (!cityMessage(event.sender.id, event.message.text)){
 		    	
 				// console.log(event.message.quick_reply.payload);
