@@ -159,6 +159,7 @@ function citySelect(recipientId){
 		"text":"Pick a city:",
 		    "quick_replies":[
 		      {
+		      	"type":"postback",
 		        "content_type":"text",
 		        "title":"Boston",
 		        "payload":"bostoncity"
