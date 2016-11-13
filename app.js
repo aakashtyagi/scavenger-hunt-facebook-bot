@@ -256,7 +256,7 @@ function giftLocMessage(recipientId, text){
 }
 
 function arrivalInquiry(recipientId){
-	"message":{
+	message:{
     "text":"Please share your location:",
     "quick_replies":[
       {
@@ -264,6 +264,7 @@ function arrivalInquiry(recipientId){
       }
     ]
   };
+
 		sendMessage(recipientId, message);
 }
 
