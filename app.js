@@ -46,6 +46,7 @@ app.post('/webhook', function (req, res) {
 
 				    console.log(propName,propValue);
 				}
+				console.log(event.message.quick_reply.payload);
 		        sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
 		    }
 		} else if (event.postback) {
