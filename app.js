@@ -39,13 +39,15 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
-		    if (!cityMessage(event.sender.id, event.message.text)){
-		    	var propValue;
+        	var propValue;
 				for(var propName in event.message) {
 				    propValue = event.message[propName];
 
 				    console.log(propName,propValue);
 				}
+        	
+		    if (!cityMessage(event.sender.id, event.message.text)){
+		    	
 				// console.log(event.message.quick_reply.payload);
 		        sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
 		    }
@@ -54,12 +56,12 @@ app.post('/webhook', function (req, res) {
 						cityMessage(event.sender.id, event.message.quick_reply.payload);
 					}
 			}
-			if(typeof event.message.attachments[0] !== undefined){
-				if(typeof event.message.attachments[0].payload.coordinates !== undefined){
-					console.log("ITS WORKING BITCHES!!!");
-				}
+			// if(typeof event.message.attachments[0] !== undefined){
+			// 	if(typeof event.message.attachments[0].payload.coordinates !== undefined){
+			// 		console.log("ITS WORKING BITCHES!!!");
+			// 	}
 				
-			}
+			// }
 		} else if (event.postback) {
 		    console.log("Postback received: " + JSON.stringify(event.postback));
 		    console.log("Payload value received: " + JSON.stringify(event.postback.payload));
