@@ -51,7 +51,7 @@ app.post('/webhook', function (req, res) {
 						cityMessage(event.sender.id, event.message.quick_reply.payload);
 					}
 				}
-				console.log(event.message.quick_reply.payload);
+				// console.log(event.message.quick_reply.payload);
 		        sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
 		    }
 		} else if (event.postback) {
