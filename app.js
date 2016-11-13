@@ -54,10 +54,10 @@ app.post('/webhook', function (req, res) {
 						cityMessage(event.sender.id, event.message.quick_reply.payload);
 					}
 			}
-			if (event.message.attachments.payload.coordinates){
-				console.log(vent.message.attachments.payload.coordinates.lat);
-				console.log(vent.message.attachments.payload.coordinates.long);
-			}
+			// if(event.message.attachments.payload.coordinates){
+			// 	console.log(vent.message.attachments.payload.coordinates.lat);
+			// 	console.log(vent.message.attachments.payload.coordinates.long);
+			// }
 		} else if (event.postback) {
 		    console.log("Postback received: " + JSON.stringify(event.postback));
 		    console.log("Payload value received: " + JSON.stringify(event.postback.payload));
