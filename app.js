@@ -39,13 +39,14 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
+        	console.log(event.message);
         	var propValue;
 				for(var propName in event.message) {
 				    propValue = event.message[propName];
 
 				    console.log(propName,propValue);
 				}
-        	
+
 		    if (!cityMessage(event.sender.id, event.message.text)){
 		    	
 				// console.log(event.message.quick_reply.payload);
