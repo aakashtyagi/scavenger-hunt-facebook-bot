@@ -299,10 +299,37 @@ function distanceMessage(recipientId, distance){
 
 function cluesMessage(recipientId){
 	if(bostonSelected){
-		var bostonClues = "Step 1 -> Look for a place called \'Circle Donuts\'','Step 2 -> Go inside the shop and ask for Scavenger Hunt menu', 'Step 3 -> Receive the gift, smile at the lady and say \'Thank you\'";
+		var bostonClues = "Step 1 -> Look for a place called \"Circle Donuts\", Step 2 -> Go inside the shop and ask for Scavenger Hunt menu, Step 3 -> Receive the gift, smile at the lady and say \"Thank you\"";
 		message = {
 		  	"text": bostonClues,
 		  };
+		sendMessage(recipientId, message);
+		giftMessage(recipientId);
+	}
+	else if(sanFranSelected){
+
+	}
+	else if(sanDiegoSelected){
+
+	}
+}
+
+function giftMessage(recipientId){
+	if(bostonSelected){
+		var bostonGiftUrl = "http://www.withsprinklesontop.net/wp-content/uploads/2012/01/DSC_0406x900.jpg";
+		message = {
+			"attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    
+                        "title": "This is your gift!",
+                        "image_url": bostonGiftUrl,
+                	}]
+            	}
+        	}
+		};
 		sendMessage(recipientId, message);
 	}
 	else if(sanFranSelected){
