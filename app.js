@@ -40,7 +40,12 @@ app.post('/webhook', function (req, res) {
         var event = events[i];
         if (event.message && event.message.text) {
 		    if (!cityMessage(event.sender.id, event.message.text)){
-		    	
+		    	var propValue;
+				for(var propName in event.message) {
+				    propValue = event.message[propName];
+
+				    console.log(propName,propValue);
+				}
 		        sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
 		    }
 		} else if (event.postback) {
