@@ -39,8 +39,12 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
-        	console.log(event.message.quick_replies);
-        	console.log(event.message.quick_replies[0].payload);
+        	for(var propName in event.message) {
+			    propValue = event.message[propName];
+
+			    console.log(propName,propValue);
+			}
+
         	if(event.message.quick_replies[0].payload == "bostoncity"){
         		cityMessage(event.sender.id, event.message.quick_replies[0].payload);
         	}
