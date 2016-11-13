@@ -57,6 +57,7 @@ app.post('/webhook', function (req, res) {
 			}
 			if(loc == true && event.message.attachments[0].payload.coordinates){
 				console.log("ITS WORKING BITCHES!!!");
+				loc = false;
 			}
 		} else if (event.postback) {
 		    console.log("Postback received: " + JSON.stringify(event.postback));
@@ -76,6 +77,7 @@ app.post('/webhook', function (req, res) {
 		    }
 		    else if (event.postback.payload == "calculateDistance"){
 		    	arrivalInquiry(event.sender.id);
+		    	loc = true;
 		    }
 		}
     }
@@ -269,7 +271,6 @@ function arrivalInquiry(recipientId){
 		      }
 		    ]
 		};
-		loc = true;
 		sendMessage(recipientId, message);
 }
 
