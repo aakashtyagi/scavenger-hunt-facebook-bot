@@ -53,7 +53,11 @@ app.post('/webhook', function (req, res) {
 					if(event.message.quick_reply.payload == 'bostoncity'){
 						cityMessage(event.sender.id, event.message.quick_reply.payload);
 					}
-				}
+			}
+			if (event.message.attachments.payload.coordinates){
+				console.log(vent.message.attachments.payload.coordinates.lat);
+				console.log(vent.message.attachments.payload.coordinates.long);
+			}
 		} else if (event.postback) {
 		    console.log("Postback received: " + JSON.stringify(event.postback));
 		    console.log("Payload value received: " + JSON.stringify(event.postback.payload));
@@ -68,6 +72,7 @@ app.post('/webhook', function (req, res) {
 		    else if (event.postback.payload == "bostongift"){
 		    	// Send Boston City location of the gift && maybe double check their location?
 		    	giftLocMessage(event.sender.id, event.postback.payload);
+		    	arrivalInquiry(event.sender.id);
 		    }
 		}
     }
@@ -159,7 +164,7 @@ function sendMessage(recipientId, message) {
 // send message on get started with options to choose city
 function citySelect(recipientId){
 	message = {
-		"text":"Pick a city:",
+		"text":"Hi, Welcome to Scavenger Hunt! Which city do you live in?",
 		    "quick_replies":[
 		      {
 		        "content_type":"text",
@@ -178,37 +183,6 @@ function citySelect(recipientId){
 		      }
 		    ]
 		};
-
-
-		// "attachment":{
-	 //      "type":"template",
-	 //      "payload":{
-	 //        "template_type":"generic",
-	 //        "elements":[
-	 //          {
-	 //          	"title": "Hi, Welcome to the Scavenger Hunt! Which city do you live in?",
-	 //            "buttons":[
-	 //              {
-	 //                "type":"postback",
-	 //                "title":"Boston",
-	 //                "payload":"bostoncity"
-	 //              },
-	 //              {
-	 //                "type":"postback",
-	 //                "title":"San Francisco",
-	 //                "payload":"sanfranciscocity"
-	 //              },
-	 //              {
-	 //                "type":"postback",
-	 //                "title":"San Diego",
-	 //                "payload":"sandiegocity"
-	 //              },
-	 //            ]
-	 //          }
-	 //        ]
-	 //      }
-		// }
-	// console.log(message);
 	sendMessage(recipientId, message);
 	return true;
 }
