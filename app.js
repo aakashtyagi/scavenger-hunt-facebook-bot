@@ -256,25 +256,14 @@ function giftLocMessage(recipientId, text){
 }
 
 function arrivalInquiry(recipientId){
-	message = {
-			"attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": {
-                    	"element": {
-                        "title": "Let us know when you arrive at the location",
-			            "buttons":[
-			              {
-			                "type":"postback",
-			                "title":"Arrived",
-			                "payload":"arrivedboston"
-			              }]
-                    	}
-                	}
-            	}
-        	}
-		};
+	"message":{
+    "text":"Please share your location:",
+    "quick_replies":[
+      {
+        "content_type":"location",
+      }
+    ]
+  }
 		sendMessage(recipientId, message);
 }
 
