@@ -36,7 +36,14 @@ app.get('/webhook', function (req, res) {
 // handler receiving messages
 app.post('/webhook', function (req, res) {
     var events = req.body.entry[0].messaging;
-    console.log(events);
+    if(typeof event.message.attachments[0] !== undefined){
+				if(typeof event.message.attachments[0].payload.coordinates !== undefined){
+					console.log("ITS WORKING BITCHES!!!");
+					console.log(event.message.attachments[0].payload.coordinates.lat);
+					console.log(event.message.attachments[0].payload.coordinates.long);
+				}
+				
+			}
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
@@ -52,12 +59,7 @@ app.post('/webhook', function (req, res) {
 						cityMessage(event.sender.id, event.message.quick_reply.payload);
 					}
 			}
-			// if(typeof event.message.attachments[0] !== undefined){
-			// 	if(typeof event.message.attachments[0].payload.coordinates !== undefined){
-			// 		console.log("ITS WORKING BITCHES!!!");
-			// 	}
-				
-			// }
+			
 		} else if (event.postback) {
 		    console.log("Postback received: " + JSON.stringify(event.postback));
 		    console.log("Payload value received: " + JSON.stringify(event.postback.payload));
