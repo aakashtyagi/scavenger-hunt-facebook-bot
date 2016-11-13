@@ -49,12 +49,12 @@ app.post('/webhook', function (req, res) {
 		    				console.log(event.message.attachments[0].payload.coordinates.lat);
 		    				console.log(event.message.attachments[0].payload.coordinates.long);
 
-		    				// lat = event.message.attachments[0].payload.coordinates.lat;
-		    				// long = event.message.attachments[0].payload.coordinates.long;
-		    				// if(bostonSelected){
-		    				// 	// dist = distance(lat, long, bostonLat, bostonLong);
-		    				// 	// distanceMessage(event.sender.id, dist);
-		    				// }
+		    				lat = event.message.attachments[0].payload.coordinates.lat;
+		    				long = event.message.attachments[0].payload.coordinates.long;
+		    				if(bostonSelected){
+		    					dist = distance(lat, long, bostonLat, bostonLong);
+		    					distanceMessage(event.sender.id, dist);
+		    				}
 		    			}
 		    		}
 		    	}
@@ -286,12 +286,12 @@ function arrivalInquiry(recipientId){
 		sendMessage(recipientId, message);
 }
 
-// function distanceMessage(recipientId, distance){
-// 	message = {
-// 	  	"text":"You are " + distance + " miles away from the gift location.";
-// 	  };
-// 	  sendMessage(recipientId, message);
-// }
+function distanceMessage(recipientId, distance){
+	message = {
+	  	"text":"You are "+distance+ " miles away from the gift location."
+	  };
+	  sendMessage(recipientId, message);
+}
 
 // send rich message with kitten
 function kittenMessage(recipientId, text) {
