@@ -38,9 +38,14 @@ app.post('/webhook', function (req, res) {
     var events = req.body.entry[0].messaging;
 
     if(events.hasOwnProperty("message")){
+    	console.log("it has a message");
     	if(events.message.hasOwnProperty("attachments")){
+    		console.log("it has an attachement");
     		if(events.message.attachments[0].hasOwnProperty("payload")){
     			console.log("fuck off");
+    		}
+    		else if(events.message.attachments.hasOwnProperty("payload")){
+    			console.log("it has a payload");
     		}
     	}
     }
