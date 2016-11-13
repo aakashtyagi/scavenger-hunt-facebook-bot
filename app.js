@@ -4,6 +4,9 @@ var request = require('request');
 var app = express();
 
 //Locations of scavenger hunt
+var bostonSelected = false;
+var sanFranSelected = false;
+var sanDiegoSelected = false;
 //BOSTON
 var bostonLat = 42.373017;
 var bostonLong = -71.062360;
@@ -39,15 +42,19 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if(event.hasOwnProperty("message")){
-		    	console.log("it has a message");
 		    	if(event.message.hasOwnProperty("attachments")){
-		    		console.log("it has an attachement");
 		    		if(event.message.attachments[0].hasOwnProperty("payload")){
-		    			console.log("it's got a payload");
 		    			if(event.message.attachments[0].payload.hasOwnProperty("coordinates")){
 		    				console.log("------------Location:-----------");
 		    				console.log(event.message.attachments[0].payload.coordinates.lat);
 		    				console.log(event.message.attachments[0].payload.coordinates.long);
+
+		    				lat = event.message.attachments[0].payload.coordinates.lat;
+		    				long = event.message.attachments[0].payload.coordinates.long;
+		    				if(bostonSelected){
+		    					dist = distance(lat, long, bostonLat, bostonLong);
+		    					distanceMessage(event.sender.id, dist);
+		    				}
 		    			}
 		    		}
 		    	}
@@ -73,6 +80,7 @@ app.post('/webhook', function (req, res) {
 		    	citySelect(event.sender.id);
 		    }
 		    else if (event.postback.payload == "bostoncity"){
+		    	bostonSelected = true;
 		    	cityMessage(event.sender.id, event.postback.payload);
 		    }
 		    else if (event.postback.payload == "bostongift"){
@@ -276,6 +284,13 @@ function arrivalInquiry(recipientId){
 		    ]
 		};
 		sendMessage(recipientId, message);
+}
+
+function distanceMessage(recipientId, distance){
+	message = {
+	  	"text":"You are " + distance + " miles away from the gift location.";
+	  }
+	  sendMessage(recipientId, message);
 }
 
 // send rich message with kitten
