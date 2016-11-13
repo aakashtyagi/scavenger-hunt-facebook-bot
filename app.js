@@ -156,34 +156,55 @@ function sendMessage(recipientId, message) {
 // send message on get started with options to choose city
 function citySelect(recipientId){
 	message = {
-		"attachment":{
-	      "type":"template",
-	      "payload":{
-	        "template_type":"generic",
-	        "elements":[
-	          {
-	          	"title": "Hi, Welcome to the Scavenger Hunt! Which city do you live in?",
-	            "buttons":[
-	              {
-	                "type":"postback",
-	                "title":"Boston",
-	                "payload":"bostoncity"
-	              },
-	              {
-	                "type":"postback",
-	                "title":"San Francisco",
-	                "payload":"sanfranciscocity"
-	              },
-	              {
-	                "type":"postback",
-	                "title":"San Diego",
-	                "payload":"sandiegocity"
-	              },
-	            ]
-	          }
-	        ]
-	      }
+		"text":"Pick a city:",
+		    "quick_replies":[
+		      {
+		        "content_type":"text",
+		        "title":"Boston",
+		        "payload":"bostoncity"
+		      },
+		      {
+		        "content_type":"text",
+		        "title":"San Francisco",
+		        "payload":"sanfranciscocity"
+		      },
+		      {
+		        "content_type":"text",
+		        "title":"San Diego",
+		        "payload":"sandiegocity"
+		      }
+		    ]
 		}
+
+
+		// "attachment":{
+	 //      "type":"template",
+	 //      "payload":{
+	 //        "template_type":"generic",
+	 //        "elements":[
+	 //          {
+	 //          	"title": "Hi, Welcome to the Scavenger Hunt! Which city do you live in?",
+	 //            "buttons":[
+	 //              {
+	 //                "type":"postback",
+	 //                "title":"Boston",
+	 //                "payload":"bostoncity"
+	 //              },
+	 //              {
+	 //                "type":"postback",
+	 //                "title":"San Francisco",
+	 //                "payload":"sanfranciscocity"
+	 //              },
+	 //              {
+	 //                "type":"postback",
+	 //                "title":"San Diego",
+	 //                "payload":"sandiegocity"
+	 //              },
+	 //            ]
+	 //          }
+	 //        ]
+	 //      }
+		// }
 	};
 	// console.log(message);
 	sendMessage(recipientId, message);
@@ -248,7 +269,6 @@ function giftLocMessage(recipientId, text){
         	}
 		};
 		sendMessage(recipientId, message);
-        arrivalInquiry(recipientId);
         return true;
 	}
 
