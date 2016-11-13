@@ -46,8 +46,8 @@ app.post('/webhook', function (req, res) {
 		    			console.log("it's got a payload");
 		    			if(event.message.attachments[0].payload.hasOwnProperty("coordinates")){
 		    				console.log("------------Location:-----------");
-		    				console.log(event.message.attachments[0].payload.lat);
-		    				console.log(event.message.attachments[0].payload.long);
+		    				console.log(event.message.attachments[0].payload.coordinates.lat);
+		    				console.log(event.message.attachments[0].payload.coordinates.long);
 		    			}
 		    		}
 		    	}
