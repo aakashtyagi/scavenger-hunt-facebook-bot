@@ -73,6 +73,9 @@ app.post('/webhook', function (req, res) {
 					if(event.message.quick_reply.payload == 'bostoncity'){
 						cityMessage(event.sender.id, event.message.quick_reply.payload);
 					}
+					else if(event.message.quick_reply.payload == 'sanfranciscocity'){
+						cityMessage(event.sender.id, event.message.quick_reply.payload);
+					}
 			}
 			
 		} else if (event.postback) {
@@ -283,7 +286,7 @@ function cityMessage(recipientId, text){
 		bostonSelected = true;
 		return true;
 	}
-	else if (values[0] === 'sanfranciscocity'){
+	else if (values.length == 1 && values[0] === 'sanfranciscocity'){
 		var sanfranUrl = "https://img0.etsystatic.com/050/0/10112051/il_570xN.686320458_6vnm.jpg";
 		message = {
 			"attachment": {
