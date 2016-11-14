@@ -187,14 +187,14 @@ function sendMessage(recipientId, message) {
 
 function getUserDetails(recipientId){
 	var http = require('https');
-	var str;
+	var user = [];
     var path = '/v2.6/' + recipientId +'?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=EAATDLl0soNgBAHHI0U8nZBKRHxug8VOaUuC7yuWDfHSgNTmCDbAvfFhWEUdkAT34pSi9ZAo3ChICxhPI24AudXPUoJdITjlSWmMU7SYZBleYHNCoNooDK79TBsbSD3LZAVL1hxQRXpliuOtRWtpu3vy84OZCppLsacYRsDW5PZBwZDZD';
     var options = {
       host: 'graph.facebook.com',
       path: path
     };
     callback = function(response) {
-	  str = '';
+	  var str = '';
 
 	  //another chunk of data has been received, so append it to `str`
 	  response.on('data', function (chunk) {
@@ -204,11 +204,13 @@ function getUserDetails(recipientId){
 	  //the whole response has been received, so we just print it out here
 	  response.on('end', function () {
 	    console.log(str);
-	    return str;
+	    user.push(str);
 	  });
 	}
 
 	http.request(options, callback).end();
+	console.log(user);
+	return user;
 }
 
 // send message on get started with options to choose city
