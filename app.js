@@ -17,7 +17,7 @@ var sanFranLong = -122.502659;
 
 //SAN DIEGO
 var sanDeigoLat = 32.801336;
-var san sanDeigoLong = -117.236578;
+var sanDeigoLong = -117.236578;
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
