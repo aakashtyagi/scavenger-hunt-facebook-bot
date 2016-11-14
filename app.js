@@ -280,6 +280,8 @@ function cityMessage(recipientId, text){
 
 		sendMessage(recipientId, message);
 		bostonSelected = true;
+		sanFranSelected = false;
+		sanDiegoSelected = false;
 		return true;
 	}
 	else if (values.length == 1 && values[0] === 'sanfranciscocity'){
@@ -305,7 +307,9 @@ function cityMessage(recipientId, text){
 
 		sendMessage(recipientId, message);
 
+		bostonSelected = false;
 		sanFranSelected = true;
+		sanDiegoSelected = false;
 		return true;
 	}
 
