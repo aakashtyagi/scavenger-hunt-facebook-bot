@@ -219,7 +219,7 @@ function citySelect(recipientId){
 	    // console.log(user[0].first_name);
 
 	    message = {
-		"text":"Hi, Welcome to Scavenger Hunt, "+user[0].first_name+"! Which city do you live in?",
+		"text":"Hi "+user[0].first_name+", welcome to Scavenger Hunt! Which city do you live in?",
 		    "quick_replies":[
 		      {
 		        "content_type":"text",
