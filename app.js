@@ -301,7 +301,27 @@ function cluesMessage(recipientId){
 	if(bostonSelected){
 		var bostonClues = "Step 1 -> Look for a place called \"Circle Donuts\", Step 2 -> Go inside the shop and ask for Scavenger Hunt menu, Step 3 -> Receive the gift, smile at the lady and say \"Thank you\"";
 		message = {
-		  	"text": bostonClues,
+		  	"attachment": {
+	        "type": "template",
+	        "payload": {
+	            "template_type": "list",
+	            "top_element_style": "compact",
+	            "elements": [
+	                {
+	                    "title": "Hint: 1",
+	                    "subtitle": "Look for a place called \"Circle Donuts\"",
+	                },
+	                {
+	                    "title": "Hint: 2",
+	                    "subtitle": "Go inside the shop and ask for Scavenger Hunt menu",
+	                },
+	                {
+	                    "title": "Hint: 3",
+	                    "subtitle": "Receive the gift, smile at the lady and say \"Thank you\"",
+	                }
+	                ]
+	            }
+	        }
 		  };
 		sendMessage(recipientId, message);
 		giftMessage(recipientId);
