@@ -45,10 +45,10 @@ app.post('/webhook', function (req, res) {
 		    	if(event.message.hasOwnProperty("attachments")){
 		    		if(event.message.attachments[0].hasOwnProperty("payload")){
 		    			if(event.message.attachments[0].payload.hasOwnProperty("coordinates")){
-		    				console.log("------------Location:-----------");
-		    				console.log(event.message.attachments[0].payload.coordinates.lat);
-		    				console.log(event.message.attachments[0].payload.coordinates.long);
-		    				console.log(bostonSelected);
+		    				// console.log("------------Location:-----------");
+		    				// console.log(event.message.attachments[0].payload.coordinates.lat);
+		    				// console.log(event.message.attachments[0].payload.coordinates.long);
+		    				// console.log(bostonSelected);
 		    				lat = event.message.attachments[0].payload.coordinates.lat;
 		    				long = event.message.attachments[0].payload.coordinates.long;
 		    				if(bostonSelected){
@@ -125,11 +125,7 @@ if (typeof(Number.prototype.toRadians) === "undefined") {
 }
 
 function distance(lat1, lon1, lat2, lon2){
-	// lat1 = 37.732310;
-	// lat2 = 32.801336;
-	// lon1 = -122.502659;
-	// lon2 = -117.236578;
-	var R = 6371e3; // metres
+	var R = 6371e3; // in metres
 	var φ1 = lat1.toRadians();
 	var φ2 = lat2.toRadians();
 	var Δφ = (lat2-lat1).toRadians();
@@ -141,8 +137,7 @@ function distance(lat1, lon1, lat2, lon2){
 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
 	var d = ((R * c)/1000)/1.6;
-	d = Math.round(d * 100) / 100
-	console.log("distance in miles:",d);
+	d = Math.round(d * 100) / 100;
 	return d;
 }
 // -------------------------------------------------------------------------------------------------------
@@ -199,7 +194,8 @@ function sendMessage(recipientId, message) {
 };
 
 
-// send message on get started with options to choose city
+// send message on get started with options to choose city 
+// now with personalized usernames. WHAAAAAATTTTT?!!!!
 function citySelect(recipientId){
 	var http = require('https');
 	var user = [];
@@ -248,13 +244,13 @@ function citySelect(recipientId){
 	}
 
 	http.request(options, callback).end();
-
+	// Yeah, fucking callback. Ughhhhhhh!
 	
 	return true;
 }
 
 
-//send rich message when user selects "boston", "san francisco", or "san diego"
+//send $$$ message when user selects "boston", "san francisco", or "san diego"
 function cityMessage(recipientId, text){
 
 	text = text || "";
@@ -316,7 +312,7 @@ function cityMessage(recipientId, text){
 	return false;
 }
 
-// Location of the gift message
+// Location of the gift to Mr. User. He should be on his way to the latest adventure. Wooo!
 function giftLocMessage(recipientId, text){
 
 	text = text || "";
@@ -374,6 +370,7 @@ function giftLocMessage(recipientId, text){
 	return false;
 }
 
+// So, AM I HERE YET? Mom, How long is it gonna take?????
 function arrivalInquiry(recipientId){
 	message = {
 			"text":"Please share your location:",
@@ -386,6 +383,7 @@ function arrivalInquiry(recipientId){
 		sendMessage(recipientId, message);
 }
 
+// "Son, it's gonna take at least xxx many miles" message
 function distanceMessage(recipientId, distance){
 	message = {
 	  	"text":"You are "+distance+ " miles away from the gift location. Once you reach the location, select \"I am here\" by tapping the menu on the left."
@@ -393,9 +391,9 @@ function distanceMessage(recipientId, distance){
 	  sendMessage(recipientId, message);
 }
 
+// But once you are there, I've got some CLUES for you. Now get searching!
 function cluesMessage(recipientId){
 	if(bostonSelected){
-		// var bostonClues = "Step 1 -> Look for a place called \"Circle Donuts\", Step 2 -> Go inside the shop and ask for Scavenger Hunt menu, Step 3 -> Receive the gift, smile at the lady and say \"Thank you\"";
 		message = {
 		  	"attachment": {
 	        "type": "template",
@@ -466,6 +464,7 @@ function cluesMessage(recipientId){
 	}
 }
 
+// And this is what your gift looks like. GIFT? Did someone say GIFT? Where?
 function giftMessage(recipientId){
 	if(bostonSelected){
 		var bostonGiftUrl = "http://www.withsprinklesontop.net/wp-content/uploads/2012/01/DSC_0406x900.jpg";
@@ -507,7 +506,7 @@ function giftMessage(recipientId){
 	}
 }
 
-// send rich message with kitten
+// send rich message with kitten ------  Because why not?
 function kittenMessage(recipientId, text) {
     
     text = text || "";
