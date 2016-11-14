@@ -207,11 +207,10 @@ function citySelect(recipientId){
 	  response.on('end', function () {
 	    // console.log(str);
 	    user.push(JSON.parse(str));
-	    console.log(user);
-	    console.log(user[0].first_name);
+	    // console.log(user[0].first_name);
 
 	    message = {
-		"text":"Hi, Welcome to Scavenger Hunt! Which city do you live in?",
+		"text":"Hi, Welcome to Scavenger Hunt, "+user[0].first_name+"! Which city do you live in?",
 		    "quick_replies":[
 		      {
 		        "content_type":"text",
