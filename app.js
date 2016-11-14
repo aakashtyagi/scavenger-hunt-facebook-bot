@@ -101,7 +101,7 @@ app.post('/webhook', function (req, res) {
 		    else if(event.postback.payload == "sanfrangift"){
 		    	giftLocMessage(event.sender.id, event.postback.payload);
 		    }
-		    else if (event.postback.payload == "calculateDistance"){
+		    else if (event.postback.payload == "calculateDistance" || event.postback.payload == "distanceInquiry"){
 		    	arrivalInquiry(event.sender.id);
 		    }
 		    else if (event.postback.payload == "arrived"){
