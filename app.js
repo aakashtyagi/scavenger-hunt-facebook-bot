@@ -187,13 +187,14 @@ function sendMessage(recipientId, message) {
 
 function getUserDetails(recipientId){
 	var http = require('https');
+	var str;
     var path = '/v2.6/' + recipientId +'?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=EAATDLl0soNgBAHHI0U8nZBKRHxug8VOaUuC7yuWDfHSgNTmCDbAvfFhWEUdkAT34pSi9ZAo3ChICxhPI24AudXPUoJdITjlSWmMU7SYZBleYHNCoNooDK79TBsbSD3LZAVL1hxQRXpliuOtRWtpu3vy84OZCppLsacYRsDW5PZBwZDZD';
     var options = {
       host: 'graph.facebook.com',
       path: path
     };
     callback = function(response) {
-	  var str = '';
+	  str = '';
 
 	  //another chunk of data has been recieved, so append it to `str`
 	  response.on('data', function (chunk) {
@@ -207,12 +208,13 @@ function getUserDetails(recipientId){
 	}
 
 	http.request(options, callback).end();
+	return str;
 }
 
 // send message on get started with options to choose city
 function citySelect(recipientId){
 	var obj = getUserDetails(recipientId);
-	console.log(obj['first_name']);
+	console.log(obj);
 	message = {
 		"text":"Hi, Welcome to Scavenger Hunt! Which city do you live in?",
 		    "quick_replies":[
