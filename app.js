@@ -185,7 +185,9 @@ function sendMessage(recipientId, message) {
     });
 };
 
-function getUserDetails(recipientId){
+
+// send message on get started with options to choose city
+function citySelect(recipientId){
 	var http = require('https');
 	var user = [];
     var path = '/v2.6/' + recipientId +'?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=EAATDLl0soNgBAHHI0U8nZBKRHxug8VOaUuC7yuWDfHSgNTmCDbAvfFhWEUdkAT34pSi9ZAo3ChICxhPI24AudXPUoJdITjlSWmMU7SYZBleYHNCoNooDK79TBsbSD3LZAVL1hxQRXpliuOtRWtpu3vy84OZCppLsacYRsDW5PZBwZDZD';
@@ -206,17 +208,12 @@ function getUserDetails(recipientId){
 	    // console.log(str);
 	    user.push(str);
 	    console.log(user);
-	    return user;
 	  });
 	}
 
 	http.request(options, callback).end();
-}
+	console.log(user);
 
-// send message on get started with options to choose city
-function citySelect(recipientId){
-	var obj = getUserDetails(recipientId);
-	console.log(obj);
 	message = {
 		"text":"Hi, Welcome to Scavenger Hunt! Which city do you live in?",
 		    "quick_replies":[
