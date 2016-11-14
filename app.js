@@ -203,15 +203,14 @@ function getUserDetails(recipientId){
 
 	  //the whole response has been received, so we just print it out here
 	  response.on('end', function () {
-	    console.log(str);
+	    // console.log(str);
 	    user.push(str);
 	    console.log(user);
+	    return user;
 	  });
 	}
 
 	http.request(options, callback).end();
-
-	return user;
 }
 
 // send message on get started with options to choose city
