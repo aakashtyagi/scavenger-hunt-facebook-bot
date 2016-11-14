@@ -11,13 +11,13 @@ var sanDiegoSelected = false;
 var bostonLat = 42.373017;
 var bostonLong = -71.062360;
 
-// //SAN FRANCISCO
-// var sanFranLat = 37.732310;
-// var sanFranLong = -122.502659;
+//SAN FRANCISCO
+var sanFranLat = 37.732310;
+var sanFranLong = -122.502659;
 
-// //SAN DIEGO
-// var sanDeigoLat = 32.801336;
-// var san sanDeigoLong = -117.236578;
+//SAN DIEGO
+var sanDeigoLat = 32.801336;
+var san sanDeigoLong = -117.236578;
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -55,6 +55,10 @@ app.post('/webhook', function (req, res) {
 		    					dist = distance(lat, long, bostonLat, bostonLong);
 		    					distanceMessage(event.sender.id, dist);
 		    				}
+		    				else if(sanFranSelected){
+		    					dist = distance(lat, long, sanFranLat, sanFranLong);
+		    					distanceMessage(event.sender.id, dist);
+		    				}
 		    			}
 		    		}
 		    	}
@@ -83,10 +87,16 @@ app.post('/webhook', function (req, res) {
 		    	bostonSelected = true;
 		    	cityMessage(event.sender.id, event.postback.payload);
 		    }
+			else if (event.postback.payload == "sanfranciscocity"){
+		    	cityMessage(event.sender.id, event.postback.payload);
+		    }
 		    else if (event.postback.payload == "bostongift"){
 		    	// Send Boston City location of the gift && maybe double check their location?
 		    	giftLocMessage(event.sender.id, event.postback.payload);
 		    	// arrivalInquiry(event.sender.id);
+		    }
+		    else if(event.postback.payload == "sanfrangift"){
+		    	giftLocMessage(event.sender.id, event.postback.payload);
 		    }
 		    else if (event.postback.payload == "calculateDistance"){
 		    	arrivalInquiry(event.sender.id);
@@ -273,6 +283,32 @@ function cityMessage(recipientId, text){
 		bostonSelected = true;
 		return true;
 	}
+	else if (values[0] === 'sanfranciscocity'){
+		var sanfranUrl = "https://img0.etsystatic.com/050/0/10112051/il_570xN.686320458_6vnm.jpg";
+		message = {
+			"attachment": {
+				"type": "template",
+				"payload": {
+					"template_type": "generic",
+					"elements": [{
+						"title": "City | San Francisco",
+                            "subtitle": "San Francisco Scavenger Hunt",
+                            "image_url": sanfranUrl ,
+                            "buttons": [{
+                                "type": "postback",
+                                "title": "Confirm location",
+                                "payload": "sanfrangift",
+						}]
+					}]
+				}
+			}
+		}
+
+		sendMessage(recipientId, message);
+
+		sanFranSelected = true;
+		return true;
+	}
 
 	return false;
 }
@@ -292,6 +328,31 @@ function giftLocMessage(recipientId, text){
                         "title": "Gift location in Boston",
                         "image_url": "https:\/\/maps.googleapis.com\/maps\/api\/staticmap?center="+bostonLat+","+bostonLong+"&zoom=16&size=764x400&key=AIzaSyB-gIN9zEFn-JiVlkYJ7XKBxiH2RtohjY0",
                         "item_url": "http:\/\/maps.apple.com\/maps?q="+bostonLat+","+bostonLong+"&z=16",
+                    	
+                    "buttons":[
+		              {
+		                "type":"postback",
+		                "payload":"calculateDistance",
+		                "title":"How far am I?"
+		              }]
+                	}]
+            	}
+        	}
+		};
+		sendMessage(recipientId, message);
+        return true;
+	}
+	else if (text === 'sanfrangift'){
+		message = {
+			"attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    
+                        "title": "Gift location in San Francisco",
+                        "image_url": "https:\/\/maps.googleapis.com\/maps\/api\/staticmap?center="+sanFranLat+","+sanFranLong+"&zoom=16&size=764x400&key=AIzaSyB-gIN9zEFn-JiVlkYJ7XKBxiH2RtohjY0",
+                        "item_url": "http:\/\/maps.apple.com\/maps?q="+sanFranLat+","+sanFranLong+"&z=16",
                     	
                     "buttons":[
 		              {
@@ -365,7 +426,37 @@ function cluesMessage(recipientId){
 		sendMessage(recipientId, message);
 	}
 	else if(sanFranSelected){
-
+		message = {
+		  	"attachment": {
+	        "type": "template",
+	        "payload": {
+	            "template_type": "list",
+	            "top_element_style": "compact",
+	            "elements": [
+	                {
+	                    "title": "Hint: 1",
+	                    "subtitle": "Take the bus and stop at train station.",
+	                },
+	                {
+	                    "title": "Hint: 2",
+	                    "subtitle": "Take the train. Never come back.",
+	                },
+	                {
+	                    "title": "Hint: 3",
+	                    "subtitle": "Receive the gift of ultimate freedom. You\'re welcome.",
+	                }
+	                ],
+	               "buttons": [
+		                {
+		                    "title": "Reveal the gift",
+		                    "type": "postback",
+		                    "payload": "revealgift"                        
+		                }
+		            ]  
+	            }
+	        }
+		  };
+		sendMessage(recipientId, message);
 	}
 	else if(sanDiegoSelected){
 
