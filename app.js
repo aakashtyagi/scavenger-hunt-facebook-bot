@@ -212,7 +212,7 @@ function getUserDetails(recipientId){
 // send message on get started with options to choose city
 function citySelect(recipientId){
 	var obj = getUserDetails(recipientId);
-	console.log(obj.first_name);
+	console.log(obj['first_name']);
 	message = {
 		"text":"Hi, Welcome to Scavenger Hunt! Which city do you live in?",
 		    "quick_replies":[
