@@ -94,6 +94,9 @@ app.post('/webhook', function (req, res) {
 		    else if (event.postback.payload == "arrived"){
 		    	cluesMessage(event.sender.id);
 		    }
+		    else if (event.postback.payload == "revealgift"){
+		    	giftMessage(event.sender.id);
+		    }
 		}
     }
     res.sendStatus(200);
@@ -299,7 +302,7 @@ function distanceMessage(recipientId, distance){
 
 function cluesMessage(recipientId){
 	if(bostonSelected){
-		var bostonClues = "Step 1 -> Look for a place called \"Circle Donuts\", Step 2 -> Go inside the shop and ask for Scavenger Hunt menu, Step 3 -> Receive the gift, smile at the lady and say \"Thank you\"";
+		// var bostonClues = "Step 1 -> Look for a place called \"Circle Donuts\", Step 2 -> Go inside the shop and ask for Scavenger Hunt menu, Step 3 -> Receive the gift, smile at the lady and say \"Thank you\"";
 		message = {
 		  	"attachment": {
 	        "type": "template",
@@ -320,11 +323,17 @@ function cluesMessage(recipientId){
 	                    "subtitle": "Receive the gift, smile at the lady and say \"Thank you\"",
 	                }
 	                ]
+	               "buttons": [
+		                {
+		                    "title": "Reveal the gift",
+		                    "type": "postback",
+		                    "payload": "revealgift"                        
+		                }
+		            ]  
 	            }
 	        }
 		  };
 		sendMessage(recipientId, message);
-		giftMessage(recipientId);
 	}
 	else if(sanFranSelected){
 
