@@ -205,11 +205,12 @@ function getUserDetails(recipientId){
 	  response.on('end', function () {
 	    console.log(str);
 	    user.push(str);
+	    console.log(user);
 	  });
 	}
 
 	http.request(options, callback).end();
-	console.log(user);
+
 	return user;
 }
 
