@@ -185,8 +185,27 @@ function sendMessage(recipientId, message) {
     });
 };
 
+function getUserDetails(recipientId){
+	var xhr = new XMLHttpRequest();
+	var url = 'https://graph.facebook.com/v2.6/'+recipientId+'?access_token=EAATDLl0soNgBAHHI0U8nZBKRHxug8VOaUuC7yuWDfHSgNTmCDbAvfFhWEUdkAT34pSi9ZAo3ChICxhPI24AudXPUoJdITjlSWmMU7SYZBleYHNCoNooDK79TBsbSD3LZAVL1hxQRXpliuOtRWtpu3vy84OZCppLsacYRsDW5PZBwZDZD';
+	xhr.open("GET", url, true);
+	xhr.setRequestHeader("Content-type", "application/json");
+	xhr.onreadystatechange = function() {
+	    if (xhr.readyState == 4) {
+	        if(xhr.status == 200) {
+	            var obj = JSON.parse(xhr.responseText);
+	         }
+	    }
+	};
+	xhr.send(null);
+	return obj;
+}
+
 // send message on get started with options to choose city
 function citySelect(recipientId){
+	var obj = getUserDetails(recipientId);
+	console.log(obj);
+	console.log(obj.first_name);
 	message = {
 		"text":"Hi, Welcome to Scavenger Hunt! Which city do you live in?",
 		    "quick_replies":[
