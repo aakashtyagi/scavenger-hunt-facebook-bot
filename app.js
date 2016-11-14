@@ -206,9 +206,9 @@ function citySelect(recipientId){
 	  //the whole response has been received, so we just print it out here
 	  response.on('end', function () {
 	    // console.log(str);
-	    user.push(str);
+	    user.push(JSON.parse(str));
 	    console.log(user);
-	    console.log(user['first_name']);
+	    console.log(user.first_name);
 
 	    message = {
 		"text":"Hi, Welcome to Scavenger Hunt! Which city do you live in?",
