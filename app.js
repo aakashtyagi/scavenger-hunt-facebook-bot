@@ -322,7 +322,7 @@ function cluesMessage(recipientId){
 	                    "title": "Hint: 3",
 	                    "subtitle": "Receive the gift, smile at the lady and say \"Thank you\"",
 	                }
-	                ]
+	                ],
 	               "buttons": [
 		                {
 		                    "title": "Reveal the gift",
