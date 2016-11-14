@@ -485,6 +485,21 @@ function giftMessage(recipientId){
 		sendMessage(recipientId, message);
 	}
 	else if(sanFranSelected){
+		var sanfranGiftUrl = "http://newheightsboise.com/wp-content/uploads/2016/01/50623-Freedom.jpg";
+		message = {
+			"attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    
+                        "title": "This is your gift!",
+                        "image_url": sanfranGiftUrl,
+                	}]
+            	}
+        	}
+		};
+		sendMessage(recipientId, message);
 
 	}
 	else if(sanDiegoSelected){
