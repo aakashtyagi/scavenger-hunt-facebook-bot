@@ -207,14 +207,9 @@ function citySelect(recipientId){
 	  response.on('end', function () {
 	    // console.log(str);
 	    user.push(str);
-	    console.log(user);
-	  });
-	}
+	    console.log(user.first_name);
 
-	http.request(options, callback).end();
-	console.log(user);
-
-	message = {
+	    message = {
 		"text":"Hi, Welcome to Scavenger Hunt! Which city do you live in?",
 		    "quick_replies":[
 		      {
@@ -234,7 +229,14 @@ function citySelect(recipientId){
 		      }
 		    ]
 		};
-	sendMessage(recipientId, message);
+		sendMessage(recipientId, message);
+
+	  });
+	}
+
+	http.request(options, callback).end();
+
+	
 	return true;
 }
 
