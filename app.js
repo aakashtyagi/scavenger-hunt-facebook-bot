@@ -84,8 +84,8 @@ app.post('/webhook', function (req, res) {
 		} else if (event.postback) {
 		    console.log("Postback received: " + JSON.stringify(event.postback));
 		    console.log("Payload value received: " + JSON.stringify(event.postback.payload));
-		    if (event.postback.payload == "get_started"){
-		    	console.log("User just pressed get started. Info: New User incoming.");
+		    if (event.postback.payload == "get_started" || event.postback.payload == "changeloc"){
+		    	// console.log("User just pressed get started. Info: New User incoming.");
 		    	// sendMessage(event.sender.id, {text: "Hi, welcome to the Scavenger Hunt! Which city are you from?"});
 		    	citySelect(event.sender.id);
 		    }
