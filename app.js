@@ -4,6 +4,7 @@ var request = require('request');
 var app = express();
 
 //Locations of scavenger hunt
+var locationdict = [];
 var bostonSelected = false;
 var sanFranSelected = false;
 var sanDiegoSelected = false;
@@ -51,15 +52,15 @@ app.post('/webhook', function (req, res) {
 		    				// console.log(bostonSelected);
 		    				lat = event.message.attachments[0].payload.coordinates.lat;
 		    				long = event.message.attachments[0].payload.coordinates.long;
-		    				if(bostonSelected){
+		    				if(locationdict[event.sender.id][0]){
 		    					dist = distance(lat, long, bostonLat, bostonLong);
 		    					distanceMessage(event.sender.id, dist);
 		    				}
-		    				else if(sanFranSelected){
+		    				else if(locationdict[event.sender.id][1]){
 		    					dist = distance(lat, long, sanFranLat, sanFranLong);
 		    					distanceMessage(event.sender.id, dist);
 		    				}
-		    				else if(sanDiegoSelected){
+		    				else if(locationdict[event.sender.id][2]){
 		    					dist = distance(lat, long, sanDeigoLat, sanDeigoLong);
 		    					distanceMessage(event.sender.id, dist);
 		    				}
@@ -270,9 +271,10 @@ function cityMessage(recipientId, text){
 		}
 
 		sendMessage(recipientId, message);
-		bostonSelected = true;
-		sanFranSelected = false;
-		sanDiegoSelected = false;
+		locationdict[recipientId] = ['true','false','false'];
+		// bostonSelected = true;
+		// sanFranSelected = false;
+		// sanDiegoSelected = false;
 		return true;
 	}
 	else if (values.length == 1 && values[0] === 'sanfranciscocity'){
@@ -297,10 +299,10 @@ function cityMessage(recipientId, text){
 		}
 
 		sendMessage(recipientId, message);
-
-		bostonSelected = false;
-		sanFranSelected = true;
-		sanDiegoSelected = false;
+		locationdict[recipientId] = ['false','true','false'];
+		// bostonSelected = false;
+		// sanFranSelected = true;
+		// sanDiegoSelected = false;
 		return true;
 	}
 	else if (values.length == 1 && values[0] === 'sandiegocity'){
@@ -325,10 +327,10 @@ function cityMessage(recipientId, text){
 		}
 
 		sendMessage(recipientId, message);
-
-		bostonSelected = false;
-		sanFranSelected = false;
-		sanDiegoSelected = true;
+		locationdict[recipientId] = ['false','false','true'];
+		// bostonSelected = false;
+		// sanFranSelected = false;
+		// sanDiegoSelected = true;
 		return true;
 	}
 
