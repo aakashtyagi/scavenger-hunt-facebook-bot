@@ -443,7 +443,7 @@ function distanceMessage(recipientId, distance){
 
 // But once you are there, I've got some CLUES for you. Now get searching!
 function cluesMessage(recipientId){
-	if(bostonSelected){
+	if(locationdict[recipientId][0]){
 		message = {
 		  	"attachment": {
 	        "type": "template",
@@ -476,7 +476,7 @@ function cluesMessage(recipientId){
 		  };
 		sendMessage(recipientId, message);
 	}
-	else if(sanFranSelected){
+	else if(locationdict[recipientId][1]){
 		message = {
 		  	"attachment": {
 	        "type": "template",
@@ -509,7 +509,7 @@ function cluesMessage(recipientId){
 		  };
 		sendMessage(recipientId, message);
 	}
-	else if(sanDiegoSelected){
+	else if(locationdict[recipientId][2]){
 		message = {
 		  	"attachment": {
 	        "type": "template",
@@ -546,7 +546,7 @@ function cluesMessage(recipientId){
 
 // And this is what your gift looks like. GIFT? Did someone say GIFT? Where?
 function giftMessage(recipientId){
-	if(bostonSelected){
+	if(locationdict[recipientId][0]){
 		var bostonGiftUrl = "http://www.withsprinklesontop.net/wp-content/uploads/2012/01/DSC_0406x900.jpg";
 		message = {
 			"attachment": {
@@ -563,7 +563,7 @@ function giftMessage(recipientId){
 		};
 		sendMessage(recipientId, message);
 	}
-	else if(sanFranSelected){
+	else if(locationdict[recipientId][1]){
 		var sanfranGiftUrl = "http://newheightsboise.com/wp-content/uploads/2016/01/50623-Freedom.jpg";
 		message = {
 			"attachment": {
@@ -581,7 +581,7 @@ function giftMessage(recipientId){
 		sendMessage(recipientId, message);
 
 	}
-	else if(sanDiegoSelected){
+	else if(locationdict[recipientId][2]){
 		var sandiegoGiftUrl = "http://cdn.mos.cms.futurecdn.net/b474f04dc5fe5e3af3ad0069d0940938-650-80.jpg";
 		message = {
 			"attachment": {
