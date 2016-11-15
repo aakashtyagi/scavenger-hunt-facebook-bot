@@ -52,8 +52,10 @@ app.post('/webhook', function (req, res) {
 		    				// console.log(bostonSelected);
 		    				lat = event.message.attachments[0].payload.coordinates.lat;
 		    				long = event.message.attachments[0].payload.coordinates.long;
-		    				console.log("------------------------DICT-------------------");
+		    				console.log("------------------------DICT------------------------");
+		    				console.log(event.sender.id);
 		    				console.log(locationdict[event.sender.id]);
+		    				console.log("----------------------------------------------------");
 		    				if(locationdict[event.sender.id][0]){
 		    					dist = distance(lat, long, bostonLat, bostonLong);
 		    					distanceMessage(event.sender.id, dist);
@@ -274,9 +276,6 @@ function cityMessage(recipientId, text){
 
 		sendMessage(recipientId, message);
 		locationdict[recipientId] = [true,false,false];
-		// bostonSelected = true;
-		// sanFranSelected = false;
-		// sanDiegoSelected = false;
 		return true;
 	}
 	else if (values.length == 1 && values[0] === 'sanfranciscocity'){
@@ -302,9 +301,6 @@ function cityMessage(recipientId, text){
 
 		sendMessage(recipientId, message);
 		locationdict[recipientId] = [false,true,false];
-		// bostonSelected = false;
-		// sanFranSelected = true;
-		// sanDiegoSelected = false;
 		return true;
 	}
 	else if (values.length == 1 && values[0] === 'sandiegocity'){
@@ -330,9 +326,6 @@ function cityMessage(recipientId, text){
 
 		sendMessage(recipientId, message);
 		locationdict[recipientId] = [false,false,true];
-		// bostonSelected = false;
-		// sanFranSelected = false;
-		// sanDiegoSelected = true;
 		return true;
 	}
 
