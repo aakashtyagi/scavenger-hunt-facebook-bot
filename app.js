@@ -59,6 +59,10 @@ app.post('/webhook', function (req, res) {
 		    					dist = distance(lat, long, sanFranLat, sanFranLong);
 		    					distanceMessage(event.sender.id, dist);
 		    				}
+		    				else if(sanDiegoSelected){
+		    					dist = distance(lat, long, sanDeigoLat, sanDeigoLong);
+		    					distanceMessage(event.sender.id, dist);
+		    				}
 		    			}
 		    		}
 		    	}
