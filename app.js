@@ -68,11 +68,7 @@ app.post('/webhook', function (req, res) {
 		    	}
 		    }
         if (event.message && event.message.text) {
-		    if (!cityMessage(event.sender.id, event.message.text)){
-		    	
-				// console.log(event.message.quick_reply.payload);
-		        sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
-		    }
+
 		    if(event.message.quick_reply){
 					if(event.message.quick_reply.payload == 'bostoncity'){
 						cityMessage(event.sender.id, event.message.quick_reply.payload);
@@ -150,21 +146,6 @@ function distance(lat1, lon1, lat2, lon2){
 	d = Math.round(d * 100) / 100;
 	return d;
 }
-// -------------------------------------------------------------------------------------------------------
-
-// GIFTS
-// Each city has a gift. and that gift has a picture, description, and location to it.
-
-// CLUES
-// Clues are hints provided to the user to help them find the gift.
-// Clues are provided once the user reaches the location of the gift. This also includes sending picture of
-// the prize.
-
-// calculate how far user is from gift location
-// function howFarFromGift(recipientId, text){
-
-// }
-
 
 // function to greet first-timers
 function greetFirstTimers(){
