@@ -76,6 +76,9 @@ app.post('/webhook', function (req, res) {
 					else if(event.message.quick_reply.payload == 'sanfranciscocity'){
 						cityMessage(event.sender.id, event.message.quick_reply.payload);
 					}
+					else if(event.message.quick_reply.payload == 'sandiegocity'){
+						cityMessage(event.sender.id, event.message.quick_reply.payload);
+					}
 			}
 			
 		} else if (event.postback) {
@@ -99,6 +102,9 @@ app.post('/webhook', function (req, res) {
 		    	// arrivalInquiry(event.sender.id);
 		    }
 		    else if(event.postback.payload == "sanfrangift"){
+		    	giftLocMessage(event.sender.id, event.postback.payload);
+		    }
+		    else if(event.postback.payload == "sandiegogift"){
 		    	giftLocMessage(event.sender.id, event.postback.payload);
 		    }
 		    else if (event.postback.payload == "calculateDistance" || event.postback.payload == "distanceInquiry"){
@@ -312,6 +318,34 @@ function cityMessage(recipientId, text){
 		sanDiegoSelected = false;
 		return true;
 	}
+	else if (values.length == 1 && values[0] === 'sandiegocity'){
+		var sandiegoUrl = "http://alwayssunnyinsd.com/wp-content/uploads/2013/10/SanDiego.jpg";
+		message = {
+			"attachment": {
+				"type": "template",
+				"payload": {
+					"template_type": "generic",
+					"elements": [{
+						"title": "City | San Diego",
+                            "subtitle": "San Diego Scavenger Hunt",
+                            "image_url": sandiegoUrl ,
+                            "buttons": [{
+                                "type": "postback",
+                                "title": "Confirm location",
+                                "payload": "sandiegogift",
+						}]
+					}]
+				}
+			}
+		}
+
+		sendMessage(recipientId, message);
+
+		bostonSelected = false;
+		sanFranSelected = false;
+		sanDiegoSelected = true;
+		return true;
+	}
 
 	return false;
 }
@@ -356,6 +390,31 @@ function giftLocMessage(recipientId, text){
                         "title": "Gift location in San Francisco",
                         "image_url": "https:\/\/maps.googleapis.com\/maps\/api\/staticmap?center="+sanFranLat+","+sanFranLong+"&zoom=16&size=764x400&key=AIzaSyB-gIN9zEFn-JiVlkYJ7XKBxiH2RtohjY0",
                         "item_url": "http:\/\/maps.apple.com\/maps?q="+sanFranLat+","+sanFranLong+"&z=16",
+                    	
+                    "buttons":[
+		              {
+		                "type":"postback",
+		                "payload":"calculateDistance",
+		                "title":"How far am I?"
+		              }]
+                	}]
+            	}
+        	}
+		};
+		sendMessage(recipientId, message);
+        return true;
+	}
+	else if (text === 'sandiegogift'){
+		message = {
+			"attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    
+                        "title": "Gift location in San Diego",
+                        "image_url": "https:\/\/maps.googleapis.com\/maps\/api\/staticmap?center="+sanDeigoLat+","+sanDeigoLong+"&zoom=16&size=764x400&key=AIzaSyB-gIN9zEFn-JiVlkYJ7XKBxiH2RtohjY0",
+                        "item_url": "http:\/\/maps.apple.com\/maps?q="+sanDeigoLat+","+sanDeigoLong+"&z=16",
                     	
                     "buttons":[
 		              {
@@ -464,7 +523,37 @@ function cluesMessage(recipientId){
 		sendMessage(recipientId, message);
 	}
 	else if(sanDiegoSelected){
-
+		message = {
+		  	"attachment": {
+	        "type": "template",
+	        "payload": {
+	            "template_type": "list",
+	            "top_element_style": "compact",
+	            "elements": [
+	                {
+	                    "title": "Hint: 1",
+	                    "subtitle": "Look for an iPhone repair shop.",
+	                },
+	                {
+	                    "title": "Hint: 2",
+	                    "subtitle": "Go inside, smash your phone.",
+	                },
+	                {
+	                    "title": "Hint: 3",
+	                    "subtitle": "Exchange it for a new one.",
+	                }
+	                ],
+	               "buttons": [
+		                {
+		                    "title": "Reveal the gift",
+		                    "type": "postback",
+		                    "payload": "revealgift"                        
+		                }
+		            ]  
+	            }
+	        }
+		  };
+		sendMessage(recipientId, message);
 	}
 }
 
@@ -506,7 +595,21 @@ function giftMessage(recipientId){
 
 	}
 	else if(sanDiegoSelected){
-
+		var sandiegoGiftUrl = "http://cdn.mos.cms.futurecdn.net/b474f04dc5fe5e3af3ad0069d0940938-650-80.jpg";
+		message = {
+			"attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    
+                        "title": "This is your gift!",
+                        "image_url": sandiegoGiftUrl,
+                	}]
+            	}
+        	}
+		};
+		sendMessage(recipientId, message);
 	}
 }
 
