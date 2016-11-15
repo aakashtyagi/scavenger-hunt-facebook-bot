@@ -273,7 +273,7 @@ function cityMessage(recipientId, text){
 		}
 
 		sendMessage(recipientId, message);
-		locationdict[recipientId] = ['true','false','false'];
+		locationdict[recipientId] = [true,false,false];
 		// bostonSelected = true;
 		// sanFranSelected = false;
 		// sanDiegoSelected = false;
@@ -301,7 +301,7 @@ function cityMessage(recipientId, text){
 		}
 
 		sendMessage(recipientId, message);
-		locationdict[recipientId] = ['false','true','false'];
+		locationdict[recipientId] = [false,true,false];
 		// bostonSelected = false;
 		// sanFranSelected = true;
 		// sanDiegoSelected = false;
@@ -329,7 +329,7 @@ function cityMessage(recipientId, text){
 		}
 
 		sendMessage(recipientId, message);
-		locationdict[recipientId] = ['false','false','true'];
+		locationdict[recipientId] = [false,false,true];
 		// bostonSelected = false;
 		// sanFranSelected = false;
 		// sanDiegoSelected = true;
