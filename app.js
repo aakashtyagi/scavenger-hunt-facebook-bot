@@ -52,6 +52,8 @@ app.post('/webhook', function (req, res) {
 		    				// console.log(bostonSelected);
 		    				lat = event.message.attachments[0].payload.coordinates.lat;
 		    				long = event.message.attachments[0].payload.coordinates.long;
+		    				console.log("------------------------DICT-------------------");
+		    				console.log(locationdict[event.sender.id]);
 		    				if(locationdict[event.sender.id][0]){
 		    					dist = distance(lat, long, bostonLat, bostonLong);
 		    					distanceMessage(event.sender.id, dist);
