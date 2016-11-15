@@ -268,11 +268,6 @@ function cityMessage(recipientId, text){
                                 "type": "postback",
                                 "title": "Confirm location",
                                 "payload": "bostongift",
-						},
-						{
-							"type": "postback",
-                            "title": "Change location",
-                            "payload": "changeloc",	
 						}]
 					}]
 				}
@@ -298,10 +293,6 @@ function cityMessage(recipientId, text){
                                 "type": "postback",
                                 "title": "Confirm location",
                                 "payload": "sanfrangift",
-						},{
-							"type": "postback",
-                            "title": "Change location",
-                            "payload": "changeloc",	
 						}]
 					}]
 				}
@@ -327,10 +318,6 @@ function cityMessage(recipientId, text){
                                 "type": "postback",
                                 "title": "Confirm location",
                                 "payload": "sandiegogift",
-						},{
-							"type": "postback",
-                            "title": "Change location",
-                            "payload": "changeloc",	
 						}]
 					}]
 				}
