@@ -464,107 +464,109 @@ function distanceMessage(recipientId, distance){
 
 // But once you are there, I've got some CLUES for you. Now get searching!
 function cluesMessage(recipientId){
-	if(locationdict === "undefined"){
+	if(locationdict[recipientId].hasOwnProperty("[0]")){
+		if(locationdict[recipientId][0]){
+			message = {
+			  	"attachment": {
+		        "type": "template",
+		        "payload": {
+		            "template_type": "list",
+		            "top_element_style": "compact",
+		            "elements": [
+		                {
+		                    "title": "Hint: 1",
+		                    "subtitle": "Look for a place called \"Circle Donuts\"",
+		                },
+		                {
+		                    "title": "Hint: 2",
+		                    "subtitle": "Go inside the shop and ask for Scavenger Hunt menu",
+		                },
+		                {
+		                    "title": "Hint: 3",
+		                    "subtitle": "Receive the gift, smile at the lady and say \"Thank you\"",
+		                }
+		                ],
+		               "buttons": [
+			                {
+			                    "title": "Reveal the gift",
+			                    "type": "postback",
+			                    "payload": "revealgift"                        
+			                }
+			            ]  
+		            }
+		        }
+			  };
+			sendMessage(recipientId, message);
+		}
+		else if(locationdict[recipientId][1]){
+			message = {
+			  	"attachment": {
+		        "type": "template",
+		        "payload": {
+		            "template_type": "list",
+		            "top_element_style": "compact",
+		            "elements": [
+		                {
+		                    "title": "Hint: 1",
+		                    "subtitle": "Take the bus to the train station.",
+		                },
+		                {
+		                    "title": "Hint: 2",
+		                    "subtitle": "Take the train. Never come back.",
+		                },
+		                {
+		                    "title": "Hint: 3",
+		                    "subtitle": "Receive the gift of ultimate freedom. You\'re welcome.",
+		                }
+		                ],
+		               "buttons": [
+			                {
+			                    "title": "Reveal the gift",
+			                    "type": "postback",
+			                    "payload": "revealgift"                        
+			                }
+			            ]  
+		            }
+		        }
+			  };
+			sendMessage(recipientId, message);
+		}
+		else if(locationdict[recipientId][2]){
+			message = {
+			  	"attachment": {
+		        "type": "template",
+		        "payload": {
+		            "template_type": "list",
+		            "top_element_style": "compact",
+		            "elements": [
+		                {
+		                    "title": "Hint: 1",
+		                    "subtitle": "Look for an iPhone repair shop.",
+		                },
+		                {
+		                    "title": "Hint: 2",
+		                    "subtitle": "Go inside, smash your phone.",
+		                },
+		                {
+		                    "title": "Hint: 3",
+		                    "subtitle": "Exchange it for a new one.",
+		                }
+		                ],
+		               "buttons": [
+			                {
+			                    "title": "Reveal the gift",
+			                    "type": "postback",
+			                    "payload": "revealgift"                        
+			                }
+			            ]  
+		            }
+		        }
+			  };
+			sendMessage(recipientId, message);
+		}
+	}
+	else{
 		citySelect(recipientId);
-	}
-	else if(locationdict[recipientId][0]){
-		message = {
-		  	"attachment": {
-	        "type": "template",
-	        "payload": {
-	            "template_type": "list",
-	            "top_element_style": "compact",
-	            "elements": [
-	                {
-	                    "title": "Hint: 1",
-	                    "subtitle": "Look for a place called \"Circle Donuts\"",
-	                },
-	                {
-	                    "title": "Hint: 2",
-	                    "subtitle": "Go inside the shop and ask for Scavenger Hunt menu",
-	                },
-	                {
-	                    "title": "Hint: 3",
-	                    "subtitle": "Receive the gift, smile at the lady and say \"Thank you\"",
-	                }
-	                ],
-	               "buttons": [
-		                {
-		                    "title": "Reveal the gift",
-		                    "type": "postback",
-		                    "payload": "revealgift"                        
-		                }
-		            ]  
-	            }
-	        }
-		  };
-		sendMessage(recipientId, message);
-	}
-	else if(locationdict[recipientId][1]){
-		message = {
-		  	"attachment": {
-	        "type": "template",
-	        "payload": {
-	            "template_type": "list",
-	            "top_element_style": "compact",
-	            "elements": [
-	                {
-	                    "title": "Hint: 1",
-	                    "subtitle": "Take the bus to the train station.",
-	                },
-	                {
-	                    "title": "Hint: 2",
-	                    "subtitle": "Take the train. Never come back.",
-	                },
-	                {
-	                    "title": "Hint: 3",
-	                    "subtitle": "Receive the gift of ultimate freedom. You\'re welcome.",
-	                }
-	                ],
-	               "buttons": [
-		                {
-		                    "title": "Reveal the gift",
-		                    "type": "postback",
-		                    "payload": "revealgift"                        
-		                }
-		            ]  
-	            }
-	        }
-		  };
-		sendMessage(recipientId, message);
-	}
-	else if(locationdict[recipientId][2]){
-		message = {
-		  	"attachment": {
-	        "type": "template",
-	        "payload": {
-	            "template_type": "list",
-	            "top_element_style": "compact",
-	            "elements": [
-	                {
-	                    "title": "Hint: 1",
-	                    "subtitle": "Look for an iPhone repair shop.",
-	                },
-	                {
-	                    "title": "Hint: 2",
-	                    "subtitle": "Go inside, smash your phone.",
-	                },
-	                {
-	                    "title": "Hint: 3",
-	                    "subtitle": "Exchange it for a new one.",
-	                }
-	                ],
-	               "buttons": [
-		                {
-		                    "title": "Reveal the gift",
-		                    "type": "postback",
-		                    "payload": "revealgift"                        
-		                }
-		            ]  
-	            }
-	        }
-		  };
-		sendMessage(recipientId, message);
 	}
 }
 
