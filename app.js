@@ -464,7 +464,10 @@ function distanceMessage(recipientId, distance){
 
 // But once you are there, I've got some CLUES for you. Now get searching!
 function cluesMessage(recipientId){
-	if(locationdict[recipientId][0]){
+	if(locationdict === "undefined"){
+		citySelect(recipientId);
+	}
+	else if(locationdict[recipientId][0]){
 		message = {
 		  	"attachment": {
 	        "type": "template",
