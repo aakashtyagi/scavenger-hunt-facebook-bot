@@ -53,18 +53,23 @@ app.post('/webhook', function (req, res) {
 		    				console.log(event.sender.id);
 		    				console.log(locationdict[event.sender.id]);
 		    				console.log("----------------------------------------------------");
-		    				if(locationdict[event.sender.id][0]){
-		    					dist = distance(lat, long, bostonLat, bostonLong);
-		    					distanceMessage(event.sender.id, dist);
-		    				}
-		    				else if(locationdict[event.sender.id][1]){
-		    					dist = distance(lat, long, sanFranLat, sanFranLong);
-		    					distanceMessage(event.sender.id, dist);
-		    				}
-		    				else if(locationdict[event.sender.id][2]){
-		    					dist = distance(lat, long, sanDeigoLat, sanDeigoLong);
-		    					distanceMessage(event.sender.id, dist);
-		    				}
+		    				if(typeof locationdict[recipientId] !== "undefined"){
+			    				if(locationdict[event.sender.id][0]){
+			    					dist = distance(lat, long, bostonLat, bostonLong);
+			    					distanceMessage(event.sender.id, dist);
+			    				}
+			    				else if(locationdict[event.sender.id][1]){
+			    					dist = distance(lat, long, sanFranLat, sanFranLong);
+			    					distanceMessage(event.sender.id, dist);
+			    				}
+			    				else if(locationdict[event.sender.id][2]){
+			    					dist = distance(lat, long, sanDeigoLat, sanDeigoLong);
+			    					distanceMessage(event.sender.id, dist);
+			    				}
+			    			}
+			    			else{
+			    				citySelect(event.sender.id);
+			    			}
 		    			}
 		    		}
 		    	}
