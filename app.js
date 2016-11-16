@@ -556,14 +556,14 @@ function giftMessage(recipientId){
                     
                         "title": "This is your gift!",
                         "image_url": bostonGiftUrl,
-                	},
-                	"buttons": [
-		                {
-		                    "title": "Share on Instagram",
-		                    "type": "postback",
-		                    "payload": "shareit"                        
-		                }
-		            ]]
+	                	"buttons": [
+			                {
+			                    "title": "Share on Instagram",
+			                    "type": "postback",
+			                    "payload": "shareit"                        
+			                }
+			            ]
+			        }]
                 	
             	}
         	}
@@ -581,15 +581,14 @@ function giftMessage(recipientId){
                     
                         "title": "This is your gift!",
                         "image_url": sanfranGiftUrl,
-                	},
-                	"buttons": [
-		                {
-		                    "title": "Share on Instagram",
-		                    "type": "postback",
-		                    "payload": "shareit"                        
-		                }
-		            ]
-		           ]
+	                	"buttons": [
+				                {
+				                    "title": "Share on Instagram",
+				                    "type": "postback",
+				                    "payload": "shareit"                        
+				                }
+				            ]
+				        }]
                 	
             	}
         	}
@@ -608,15 +607,14 @@ function giftMessage(recipientId){
                     
                         "title": "This is your gift!",
                         "image_url": sandiegoGiftUrl,
-                	},
-                	"buttons": [
-		                {
-		                    "title": "Share on Instagram",
-		                    "type": "postback",
-		                    "payload": "shareit"                        
-		                }
-		            ]
-		           ]
+                		"buttons": [
+			                {
+			                    "title": "Share on Instagram",
+			                    "type": "postback",
+			                    "payload": "shareit"                        
+			                }
+			            ]
+			        }]
                 	
             	}
         	}
