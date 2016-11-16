@@ -75,37 +75,40 @@ app.post('/webhook', function (req, res) {
         if (event.message && event.message.text) {
 
 		    if(event.message.quick_reply){
-					if(event.message.quick_reply.payload == 'bostoncity'){
-						cityMessage(event.sender.id, event.message.quick_reply.payload);
-					}
-					else if(event.message.quick_reply.payload == 'sanfranciscocity'){
-						cityMessage(event.sender.id, event.message.quick_reply.payload);
-					}
-					else if(event.message.quick_reply.payload == 'sandiegocity'){
-						cityMessage(event.sender.id, event.message.quick_reply.payload);
-					}
+
+		    	switch(event.message.quick_reply.payload){
+		    		case "bostoncity":
+		    			cityMessage(event.sender.id, event.message.quick_reply.payload);
+		    			break;
+		    		case "sanfranciscocity":
+		    			cityMessage(event.sender.id, event.message.quick_reply.payload);
+		    			break;
+		    		case "sandiegocity":
+		    			cityMessage(event.sender.id, event.message.quick_reply.payload);
+		    			break;
+		    		default:
+		    			console.log("invalid city selected");
+		    	}
+
+					// if(event.message.quick_reply.payload == 'bostoncity'){
+					// 	cityMessage(event.sender.id, event.message.quick_reply.payload);
+					// }
+					// else if(event.message.quick_reply.payload == 'sanfranciscocity'){
+					// 	cityMessage(event.sender.id, event.message.quick_reply.payload);
+					// }
+					// else if(event.message.quick_reply.payload == 'sandiegocity'){
+					// 	cityMessage(event.sender.id, event.message.quick_reply.payload);
+					// }
 			}
 			
 		} else if (event.postback) {
-		    console.log("Postback received: " + JSON.stringify(event.postback));
-		    console.log("Payload value received: " + JSON.stringify(event.postback.payload));
+		    //console.log("Postback received: " + JSON.stringify(event.postback));
+		    //console.log("Payload value received: " + JSON.stringify(event.postback.payload));
 		    if (event.postback.payload == "get_started" || event.postback.payload == "changeloc"){
-		    	// console.log("User just pressed get started. Info: New User incoming.");
-		    	// sendMessage(event.sender.id, {text: "Hi, welcome to the Scavenger Hunt! Which city are you from?"});
 		    	citySelect(event.sender.id);
 		    }
-		    // don't think i need these next 2 conditions anymore
-		    else if (event.postback.payload == "bostoncity"){
-		    	bostonSelected = true;
-		    	cityMessage(event.sender.id, event.postback.payload);
-		    }
-			else if (event.postback.payload == "sanfranciscocity"){
-		    	cityMessage(event.sender.id, event.postback.payload);
-		    }
 		    else if (event.postback.payload == "bostongift"){
-		    	// Send Boston City location of the gift && maybe double check their location?
 		    	giftLocMessage(event.sender.id, event.postback.payload);
-		    	// arrivalInquiry(event.sender.id);
 		    }
 		    else if(event.postback.payload == "sanfrangift"){
 		    	giftLocMessage(event.sender.id, event.postback.payload);
@@ -558,7 +561,7 @@ function giftMessage(recipientId){
                         "image_url": bostonGiftUrl,
 	                	"buttons": [
 			                {
-			                    "title": "Share on Instagram",
+			                    "title": "Tell your friends about it",
 			                    "type": "postback",
 			                    "payload": "shareit"                        
 			                }
@@ -583,7 +586,7 @@ function giftMessage(recipientId){
                         "image_url": sanfranGiftUrl,
 	                	"buttons": [
 				                {
-				                    "title": "Share on Instagram",
+				                    "title": "Tell your friends about it",
 				                    "type": "postback",
 				                    "payload": "shareit"                        
 				                }
@@ -609,7 +612,7 @@ function giftMessage(recipientId){
                         "image_url": sandiegoGiftUrl,
                 		"buttons": [
 			                {
-			                    "title": "Share on Instagram",
+			                    "title": "Tell your friends about it",
 			                    "type": "postback",
 			                    "payload": "shareit"                        
 			                }
@@ -633,7 +636,7 @@ function shareIt(recipientId){
 		        "buttons":[
 		          {
 		            "type":"web_url",
-		            "url":"https://www.instagram.com/",
+		            "url":"https://www.instagram.com/",	// Facebook won't let me use the iPhone hooks and Android Intents links
 		            "title":"Share on Instagram"
 		          },
 		        ]
