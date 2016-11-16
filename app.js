@@ -46,10 +46,7 @@ app.post('/webhook', function (req, res) {
 		    	if(event.message.hasOwnProperty("attachments")){
 		    		if(event.message.attachments[0].hasOwnProperty("payload")){
 		    			if(event.message.attachments[0].payload.hasOwnProperty("coordinates")){
-		    				// console.log("------------Location:-----------");
-		    				// console.log(event.message.attachments[0].payload.coordinates.lat);
-		    				// console.log(event.message.attachments[0].payload.coordinates.long);
-		    				// console.log(bostonSelected);
+		    				
 		    				lat = event.message.attachments[0].payload.coordinates.lat;
 		    				long = event.message.attachments[0].payload.coordinates.long;
 		    				console.log("------------------------DICT------------------------");
@@ -92,8 +89,6 @@ app.post('/webhook', function (req, res) {
 			}
 			
 		} else if (event.postback) {
-		    //console.log("Postback received: " + JSON.stringify(event.postback));
-		    //console.log("Payload value received: " + JSON.stringify(event.postback.payload));
 
 		    switch(event.postback.payload){
 		    	case "get_started":
@@ -127,34 +122,9 @@ app.post('/webhook', function (req, res) {
 		    		shareIt(event.sender.id);
 		    		break;
 		    	default:
-		    		console.log("something's fucked up in postbacks. shit.");
+		    		console.log("something's fucked up in postbacks. shit. fuck. okay, fix it.");
 
 		    }
-
-		    // if (event.postback.payload == "get_started" || event.postback.payload == "changeloc"){
-		    // 	citySelect(event.sender.id);
-		    // }
-		    // else if (event.postback.payload == "bostongift"){
-		    // 	giftLocMessage(event.sender.id, event.postback.payload);
-		    // }
-		    // else if(event.postback.payload == "sanfrangift"){
-		    // 	giftLocMessage(event.sender.id, event.postback.payload);
-		    // }
-		    // else if(event.postback.payload == "sandiegogift"){
-		    // 	giftLocMessage(event.sender.id, event.postback.payload);
-		    // }
-		    // else if (event.postback.payload == "calculateDistance" || event.postback.payload == "distanceInquiry"){
-		    // 	arrivalInquiry(event.sender.id);
-		    // }
-		    // else if (event.postback.payload == "arrived"){
-		    // 	cluesMessage(event.sender.id);
-		    // }
-		    // else if (event.postback.payload == "revealgift"){
-		    // 	giftMessage(event.sender.id);
-		    // }
-		    // else if (event.postback.payload == "shareit"){
-		    // 	shareIt(event.sender.id);
-		    // }
 		}
     }
     res.sendStatus(200);
@@ -185,6 +155,7 @@ function distance(lat1, lon1, lat2, lon2){
 	d = Math.round(d * 100) / 100;
 	return d;
 }
+// ---------------------------------------------------------------------------------------------------------
 
 // function to greet first-timers
 function greetFirstTimers(){
@@ -225,7 +196,7 @@ function sendMessage(recipientId, message) {
 
 
 // send message on get started with options to choose city 
-// now with personalized usernames. WHAAAAAATTTTT?!!!!
+// now with personalized usernames. WHAAAAAATTTTT?!!!! No wayyyyyy
 function citySelect(recipientId){
 	var http = require('https');
 	var user = [];
@@ -515,7 +486,7 @@ function cluesMessage(recipientId){
 	            "elements": [
 	                {
 	                    "title": "Hint: 1",
-	                    "subtitle": "Take the bus and stop at train station.",
+	                    "subtitle": "Take the bus to the train station.",
 	                },
 	                {
 	                    "title": "Hint: 2",
