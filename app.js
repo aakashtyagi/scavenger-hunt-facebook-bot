@@ -633,7 +633,7 @@ function shareIt(recipientId){
 		        "buttons":[
 		          {
 		            "type":"web_url",
-		            "url":"instagram://camera",
+		            "url":"https://instagram://camera",
 		            "title":"Share on Instagram"
 		          },
 		        ]
