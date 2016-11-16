@@ -53,7 +53,7 @@ app.post('/webhook', function (req, res) {
 		    				console.log(event.sender.id);
 		    				console.log(locationdict[event.sender.id]);
 		    				console.log("----------------------------------------------------");
-		    				if(typeof locationdict[recipientId] !== "undefined"){
+		    				if(typeof locationdict[event.sender.id] !== "undefined"){
 			    				if(locationdict[event.sender.id][0]){
 			    					dist = distance(lat, long, bostonLat, bostonLong);
 			    					distanceMessage(event.sender.id, dist);
