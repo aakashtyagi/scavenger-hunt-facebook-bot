@@ -94,6 +94,7 @@ app.post('/webhook', function (req, res) {
 		    	// sendMessage(event.sender.id, {text: "Hi, welcome to the Scavenger Hunt! Which city are you from?"});
 		    	citySelect(event.sender.id);
 		    }
+		    // don't think i need these next 2 conditions anymore
 		    else if (event.postback.payload == "bostoncity"){
 		    	bostonSelected = true;
 		    	cityMessage(event.sender.id, event.postback.payload);
