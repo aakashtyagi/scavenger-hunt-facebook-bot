@@ -464,7 +464,7 @@ function distanceMessage(recipientId, distance){
 
 // But once you are there, I've got some CLUES for you. Now get searching!
 function cluesMessage(recipientId){
-	if(locationdict[recipientId].hasOwnProperty("[0]")){
+	if(typeof locationdict[recipientId] !== "undefined"){
 		if(locationdict[recipientId][0]){
 			message = {
 			  	"attachment": {
