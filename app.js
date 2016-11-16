@@ -90,7 +90,10 @@ app.post('/webhook', function (req, res) {
 		    			console.log("invalid city selected");
 		    	}
 			}
-			else {
+			else if(event.message.text == "meow" || event.message.text == "Meow" || event.message.text == "MEOW"){
+				kittenMessage(event.sender.id, "kitten 300 300");
+			}
+			else{
 				citySelect(event.sender.id);
 			}
 			
