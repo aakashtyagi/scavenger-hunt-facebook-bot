@@ -90,6 +90,9 @@ app.post('/webhook', function (req, res) {
 		    			console.log("invalid city selected");
 		    	}
 			}
+			else {
+				citySelect(event.sender.id);
+			}
 			
 		} else if (event.postback) {
 
