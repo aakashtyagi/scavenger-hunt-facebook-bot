@@ -83,6 +83,9 @@ app.post('/webhook', function (req, res) {
 		    		case "sandiegocity":
 		    			cityMessage(event.sender.id, event.message.quick_reply.payload);
 		    			break;
+		    		case "othercity":
+		    			otherCity(event.sender.id);
+		    			break;
 		    		default:
 		    			console.log("invalid city selected");
 		    	}
@@ -236,6 +239,11 @@ function citySelect(recipientId){
 		        "content_type":"text",
 		        "title":"San Diego",
 		        "payload":"sandiegocity"
+		      },
+		      {
+		        "content_type":"text",
+		        "title":"Other",
+		        "payload":"othercity"
 		      }
 		    ]
 		};
@@ -248,6 +256,13 @@ function citySelect(recipientId){
 	// Yeah, fucking callback. Ughhhhhhh!
 	
 	return true;
+}
+
+function otherCity(recipientId){
+	message = {
+	  	"text":"Sorry, we're currently unavailable in your city. If you want to change your city, select \"Change location from the menu on left.\"";
+	  };
+	  sendMessage(recipientId, message);
 }
 
 
