@@ -89,45 +89,72 @@ app.post('/webhook', function (req, res) {
 		    		default:
 		    			console.log("invalid city selected");
 		    	}
-
-					// if(event.message.quick_reply.payload == 'bostoncity'){
-					// 	cityMessage(event.sender.id, event.message.quick_reply.payload);
-					// }
-					// else if(event.message.quick_reply.payload == 'sanfranciscocity'){
-					// 	cityMessage(event.sender.id, event.message.quick_reply.payload);
-					// }
-					// else if(event.message.quick_reply.payload == 'sandiegocity'){
-					// 	cityMessage(event.sender.id, event.message.quick_reply.payload);
-					// }
 			}
 			
 		} else if (event.postback) {
 		    //console.log("Postback received: " + JSON.stringify(event.postback));
 		    //console.log("Payload value received: " + JSON.stringify(event.postback.payload));
-		    if (event.postback.payload == "get_started" || event.postback.payload == "changeloc"){
-		    	citySelect(event.sender.id);
+
+		    switch(event.postback.payload){
+		    	case "get_started":
+		    		citySelect(event.sender.id);
+		    		break;
+		    	case "changeloc":
+		    		citySelect(event.sender.id);
+		    		break;
+		    	case "bostongift":
+		    		giftLocMessage(event.sender.id, event.postback.payload);
+		    		break;
+		    	case "sanfrangift":
+		    		giftLocMessage(event.sender.id, event.postback.payload);
+		    		break;
+		    	case "sandiegogift":
+		    		giftLocMessage(event.sender.id, event.postback.payload);
+		    		break;
+		    	case "calculateDistance":
+		    		arrivalInquiry(event.sender.id);
+		    		break;
+		    	case "distanceInquiry":
+		    		arrivalInquiry(event.sender.id);
+		    		break;
+		    	case "arrived":
+		    		cluesMessage(event.sender.id);
+		    		break;
+		    	case "revealgift":
+		    		giftMessage(event.sender.id);
+		    		break;
+		    	case "shareit":
+		    		shareIt(event.sender.id);
+		    		break;
+		    	default:
+		    		console.log("something's fucked up in postbacks. shit.");
+
 		    }
-		    else if (event.postback.payload == "bostongift"){
-		    	giftLocMessage(event.sender.id, event.postback.payload);
-		    }
-		    else if(event.postback.payload == "sanfrangift"){
-		    	giftLocMessage(event.sender.id, event.postback.payload);
-		    }
-		    else if(event.postback.payload == "sandiegogift"){
-		    	giftLocMessage(event.sender.id, event.postback.payload);
-		    }
-		    else if (event.postback.payload == "calculateDistance" || event.postback.payload == "distanceInquiry"){
-		    	arrivalInquiry(event.sender.id);
-		    }
-		    else if (event.postback.payload == "arrived"){
-		    	cluesMessage(event.sender.id);
-		    }
-		    else if (event.postback.payload == "revealgift"){
-		    	giftMessage(event.sender.id);
-		    }
-		    else if (event.postback.payload == "shareit"){
-		    	shareIt(event.sender.id);
-		    }
+
+		    // if (event.postback.payload == "get_started" || event.postback.payload == "changeloc"){
+		    // 	citySelect(event.sender.id);
+		    // }
+		    // else if (event.postback.payload == "bostongift"){
+		    // 	giftLocMessage(event.sender.id, event.postback.payload);
+		    // }
+		    // else if(event.postback.payload == "sanfrangift"){
+		    // 	giftLocMessage(event.sender.id, event.postback.payload);
+		    // }
+		    // else if(event.postback.payload == "sandiegogift"){
+		    // 	giftLocMessage(event.sender.id, event.postback.payload);
+		    // }
+		    // else if (event.postback.payload == "calculateDistance" || event.postback.payload == "distanceInquiry"){
+		    // 	arrivalInquiry(event.sender.id);
+		    // }
+		    // else if (event.postback.payload == "arrived"){
+		    // 	cluesMessage(event.sender.id);
+		    // }
+		    // else if (event.postback.payload == "revealgift"){
+		    // 	giftMessage(event.sender.id);
+		    // }
+		    // else if (event.postback.payload == "shareit"){
+		    // 	shareIt(event.sender.id);
+		    // }
 		}
     }
     res.sendStatus(200);
@@ -561,7 +588,7 @@ function giftMessage(recipientId){
                         "image_url": bostonGiftUrl,
 	                	"buttons": [
 			                {
-			                    "title": "Tell your friends about it",
+			                    "title": "Tell your friends!",
 			                    "type": "postback",
 			                    "payload": "shareit"                        
 			                }
@@ -586,7 +613,7 @@ function giftMessage(recipientId){
                         "image_url": sanfranGiftUrl,
 	                	"buttons": [
 				                {
-				                    "title": "Tell your friends about it",
+				                    "title": "Tell your friends!",
 				                    "type": "postback",
 				                    "payload": "shareit"                        
 				                }
@@ -612,7 +639,7 @@ function giftMessage(recipientId){
                         "image_url": sandiegoGiftUrl,
                 		"buttons": [
 			                {
-			                    "title": "Tell your friends about it",
+			                    "title": "Tell your friends!",
 			                    "type": "postback",
 			                    "payload": "shareit"                        
 			                }
