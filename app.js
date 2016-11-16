@@ -260,7 +260,7 @@ function citySelect(recipientId){
 
 function otherCity(recipientId){
 	message = {
-	  	"text":"Sorry, we're currently unavailable in your city. If you want to change your city, select \"Change location from the menu on left.\""
+	  	"text":"Sorry, we're currently unavailable in your city. If you want to change your city, select \"Change location\" from the menu on left."
 	  };
 	  sendMessage(recipientId, message);
 }
