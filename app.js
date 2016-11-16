@@ -122,6 +122,9 @@ app.post('/webhook', function (req, res) {
 		    else if (event.postback.payload == "revealgift"){
 		    	giftMessage(event.sender.id);
 		    }
+		    else if (event.postback.payload == "shareit"){
+		    	shareIt(event.sender.id);
+		    }
 		}
     }
     res.sendStatus(200);
@@ -553,7 +556,14 @@ function giftMessage(recipientId){
                     
                         "title": "This is your gift!",
                         "image_url": bostonGiftUrl,
-                	}]
+                	}],
+                	"buttons": [
+		                {
+		                    "title": "Share on Instagram",
+		                    "type": "postback",
+		                    "payload": "shareit"                        
+		                }
+		            ]
             	}
         	}
 		};
@@ -570,7 +580,14 @@ function giftMessage(recipientId){
                     
                         "title": "This is your gift!",
                         "image_url": sanfranGiftUrl,
-                	}]
+                	}],
+                	"buttons": [
+		                {
+		                    "title": "Share on Instagram",
+		                    "type": "postback",
+		                    "payload": "shareit"                        
+		                }
+		            ]
             	}
         	}
 		};
@@ -588,12 +605,39 @@ function giftMessage(recipientId){
                     
                         "title": "This is your gift!",
                         "image_url": sandiegoGiftUrl,
-                	}]
+                	}],
+                	"buttons": [
+		                {
+		                    "title": "Share on Instagram",
+		                    "type": "postback",
+		                    "payload": "shareit"                        
+		                }
+		            ]
             	}
         	}
 		};
 		sendMessage(recipientId, message);
 	}
+}
+
+function shareIt(recipientId){
+	message = {
+			"attachment":{
+		      "type":"template",
+		      "payload":{
+		        "template_type":"button",
+		        "text":"Let your friends know what you found today!",
+		        "buttons":[
+		          {
+		            "type":"web_url",
+		            "url":"instagram://camera",
+		            "title":"Share on Instagram"
+		          },
+		        ]
+		      }
+		    }
+		};
+		sendMessage(recipientId, message);
 }
 
 // send rich message with kitten ------  Because why not?
