@@ -53,7 +53,7 @@ app.post('/webhook', function (req, res) {
 		    				console.log(event.sender.id);
 		    				console.log(locationdict[event.sender.id]);
 		    				console.log("----------------------------------------------------");
-		    				if(typeof locationdict[event.sender.id] !== "undefined"){
+		    				
 			    				if(locationdict[event.sender.id][0]){
 			    					dist = distance(lat, long, bostonLat, bostonLong);
 			    					distanceMessage(event.sender.id, dist);
@@ -66,10 +66,8 @@ app.post('/webhook', function (req, res) {
 			    					dist = distance(lat, long, sanDeigoLat, sanDeigoLong);
 			    					distanceMessage(event.sender.id, dist);
 			    				}
-			    			}
-			    			else{
-			    				citySelect(event.sender.id);
-			    			}
+			    			
+			    			
 		    			}
 		    		}
 		    	}
@@ -448,15 +446,20 @@ function giftLocMessage(recipientId, text){
 
 // So, AM I HERE YET? Mom, How long is it gonna take?????
 function arrivalInquiry(recipientId){
-	message = {
-			"text":"Please share your location:",
-		    "quick_replies":[
-		      {
-		        "content_type":"location",
-		      }
-		    ]
-		};
-		sendMessage(recipientId, message);
+	if(typeof locationdict[event.sender.id] !== "undefined"){
+		message = {
+				"text":"Please share your location:",
+			    "quick_replies":[
+			      {
+			        "content_type":"location",
+			      }
+			    ]
+			};
+			sendMessage(recipientId, message);
+	}
+	else{
+		citySelect(recipientId);
+	}
 }
 
 // "Son, it's gonna take at least xxx many miles" message
@@ -684,7 +687,7 @@ function kittenMessage(recipientId, text) {
     if (values.length === 3 && values[0] === 'kitten') {
         if (Number(values[1]) > 0 && Number(values[2]) > 0) {
             
-            var sizes = ["300","400","500","600","700","800","900"];
+            var sizes = ["300","350","400","450","500","550","600","650","700","750","800","850","900"];
             num1 = sizes[Math.floor(Math.random() * sizes.length)];
             num2 = sizes[Math.floor(Math.random() * sizes.length)];
             var imageUrl = "https://placekitten.com/" + num1 + "/" + num2;
@@ -696,7 +699,7 @@ function kittenMessage(recipientId, text) {
                         "template_type": "generic",
                         "elements": [{
                             "title": "Kitten",
-                            "subtitle": "Cute kitten picture",
+                            "subtitle": "Meow :)",
                             "image_url": imageUrl ,
                             "buttons": [{
                                 "type": "web_url",
