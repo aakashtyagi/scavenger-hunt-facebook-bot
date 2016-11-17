@@ -95,7 +95,7 @@ app.post('/webhook', function (req, res) {
 			}
 			else if(event.message.text == "meow" || event.message.text == "Meow" || event.message.text == "MEOW"){
 				kittenMessage(event.sender.id, "kitten 300 300");
-			}
+			}	// Cat pictures ----- because why not.
 			else{
 				citySelect(event.sender.id);
 			}
@@ -134,7 +134,7 @@ app.post('/webhook', function (req, res) {
 		    		shareIt(event.sender.id);
 		    		break;
 		    	default:
-		    		console.log("something's fucked up in postbacks. shit. fuck. okay, fix it.");
+		    		console.log("something's fucked up in postbacks. shit. fuck. okay, fix it now.");
 
 		    }
 		}
@@ -272,6 +272,64 @@ function otherCity(recipientId){
 	  	"text":"Sorry, we're currently unavailable in your city. If you want to change your city, select \"Change location\" from the menu on left."
 	  };
 	  sendMessage(recipientId, message);
+}
+
+function jumpAhead(recipientId){
+	var http = require('https');
+	var user = [];
+    var path = '/v2.6/' + recipientId +'?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=EAATDLl0soNgBAHHI0U8nZBKRHxug8VOaUuC7yuWDfHSgNTmCDbAvfFhWEUdkAT34pSi9ZAo3ChICxhPI24AudXPUoJdITjlSWmMU7SYZBleYHNCoNooDK79TBsbSD3LZAVL1hxQRXpliuOtRWtpu3vy84OZCppLsacYRsDW5PZBwZDZD';
+    var options = {
+      host: 'graph.facebook.com',
+      path: path
+    };
+    callback = function(response) {
+	  var str = '';
+
+	  //another chunk of data has been received, so append it to `str`
+	  response.on('data', function (chunk) {
+	    str += chunk;
+	  });
+
+	  //the whole response has been received, so we just print it out here
+	  response.on('end', function () {
+	    // console.log(str);
+	    user.push(JSON.parse(str));
+	    // console.log(user[0].first_name);
+
+	    message = {
+			"text":"Jumping ahead, aren't we? Let's first pick a city, "+user[0].first_name+".",
+		    "quick_replies":[
+		      {
+		        "content_type":"text",
+		        "title":"Boston",
+		        "payload":"bostoncity"
+		      },
+		      {
+		        "content_type":"text",
+		        "title":"San Francisco",
+		        "payload":"sanfranciscocity"
+		      },
+		      {
+		        "content_type":"text",
+		        "title":"San Diego",
+		        "payload":"sandiegocity"
+		      },
+		      {
+		        "content_type":"text",
+		        "title":"Other",
+		        "payload":"othercity"
+		      }
+		    ]
+		};
+		sendMessage(recipientId, message);
+
+	  });
+	}
+
+	http.request(options, callback).end();
+	// Yeah, fucking callback. Ughhhhhhh!
+	
+	return true;
 }
 
 
@@ -444,7 +502,7 @@ function giftLocMessage(recipientId, text){
 	return false;
 }
 
-// So, AM I HERE YET? Mom, How long is it gonna take?????
+// So, AM I HERE YET? Mom, How long is it gonna take????? ****turns on music on Spotify****
 function arrivalInquiry(recipientId){
 	if(typeof locationdict[recipientId] !== "undefined"){
 		message = {
@@ -458,7 +516,7 @@ function arrivalInquiry(recipientId){
 			sendMessage(recipientId, message);
 	}
 	else{
-		citySelect(recipientId);
+		jumpAhead(recipientId);
 	}
 }
 
@@ -574,7 +632,7 @@ function cluesMessage(recipientId){
 		}
 	}
 	else{
-		citySelect(recipientId);
+		jumpAhead(recipientId);
 	}
 }
 
