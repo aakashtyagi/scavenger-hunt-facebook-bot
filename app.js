@@ -684,7 +684,10 @@ function kittenMessage(recipientId, text) {
     if (values.length === 3 && values[0] === 'kitten') {
         if (Number(values[1]) > 0 && Number(values[2]) > 0) {
             
-            var imageUrl = "https://placekitten.com/" + Number(values[1]) + "/" + Number(values[2]);
+            var sizes = ["300","400","500","600","700","800","900"];
+            num1 = sizes[Math.floor(Math.random() * sizes.length)];
+            num2 = sizes[Math.floor(Math.random() * sizes.length)];
+            var imageUrl = "https://placekitten.com/" + num1 + "/" + num2;
             
             message = {
                 "attachment": {
