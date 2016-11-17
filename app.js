@@ -446,7 +446,7 @@ function giftLocMessage(recipientId, text){
 
 // So, AM I HERE YET? Mom, How long is it gonna take?????
 function arrivalInquiry(recipientId){
-	if(typeof locationdict[event.sender.id] !== "undefined"){
+	if(typeof locationdict[recipientId] !== "undefined"){
 		message = {
 				"text":"Please share your location:",
 			    "quick_replies":[
